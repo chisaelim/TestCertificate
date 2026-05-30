@@ -48,7 +48,6 @@ const columns = [
   //         cell.getValue() !== null
   //           ? "/storage/images/students/thumbnails/" + cell.getValue()
   //           : "/assets/images/emptyProfile.png",
-  //       alt: "student image",
   //     }),
   // },
   {

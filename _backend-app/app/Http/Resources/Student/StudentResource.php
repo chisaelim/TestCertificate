@@ -22,7 +22,7 @@ class StudentResource extends JsonResource
             'home_no' => $this->home_no,
             'street_no' => $this->street_no,
             'phone' => $this->phone,
-            'image' => $this->image,
+            'photo' => $this->photo,
             'thumbnail' => $this->thumbnail,
             'gender' => $this->whenLoaded('gender', fn() => new GenderResource($this->gender)),
             'nationality' => $this->whenLoaded('nationality', fn() => new NationalityResource($this->nationality)),

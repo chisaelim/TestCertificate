@@ -22,7 +22,7 @@ class DetailStudentResource extends JsonResource
             'home_no' => $this->home_no,
             'street_no' => $this->street_no,
             'phone' => $this->phone,
-            'image' => $this->image,
+            'photo' => $this->photo,
             'thumbnail' => $this->thumbnail,
 
             'gender_id' => $this->gender_id,

@@ -102,8 +102,8 @@ class StudentController extends Controller
             DB::beginTransaction();
 
             $newImage = null;
-            if (!empty($validated['image'])) {
-                $newImage = $imageClass->store($request->file('image'));
+            if (!empty($validated['photo'])) {
+                $newImage = $imageClass->store($request->file('photo'));
             }
 
             $student = Student::create([
@@ -202,9 +202,9 @@ class StudentController extends Controller
         try {
             DB::beginTransaction();
 
-            if ($request->has('image')) {
-                if (!empty($validated['image'])) {
-                    $newImage = $imageClass->store($request->file('image'));
+            if ($request->has('photo')) {
+                if (!empty($validated['photo'])) {
+                    $newImage = $imageClass->store($request->file('photo'));
                 }
                 $student->photo = $newImage;
             }
@@ -231,8 +231,8 @@ class StudentController extends Controller
 
             DB::commit();
 
-            // Delete old image only after DB commit succeeds
-            if ($request->has('image')) {
+            // Delete old photo only after DB commit succeeds
+            if ($request->has('photo')) {
                 $imageClass->delete($oldImage);
             }
         } catch (Throwable $th) {
