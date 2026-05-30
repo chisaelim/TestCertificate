@@ -12,7 +12,7 @@ class VillageObserver
      */
     public function created(Village $village): void
     {
-        Cache::forget('villagesCache'.$village->id_parent);
+        Cache::forget('villagesCache' . $village->parent_id);
 
     }
 
@@ -21,7 +21,7 @@ class VillageObserver
      */
     public function updated(Village $village): void
     {
-        Cache::forget('villagesCache'.$village->id_parent);
+        Cache::forget('villagesCache' . $village->parent_id);
 
     }
 
@@ -30,7 +30,7 @@ class VillageObserver
      */
     public function deleted(Village $village): void
     {
-        Cache::forget('villagesCache'.$village->id_parent);
+        Cache::forget('villagesCache' . $village->parent_id);
 
     }
 
@@ -39,7 +39,7 @@ class VillageObserver
      */
     public function restored(Village $village): void
     {
-        Cache::forget('villagesCache'.$village->id_parent);
+        Cache::forget('villagesCache' . $village->parent_id);
 
     }
 
@@ -48,7 +48,7 @@ class VillageObserver
      */
     public function forceDeleted(Village $village): void
     {
-        Cache::forget('villagesCache'.$village->id_parent);
+        Cache::forget('villagesCache' . $village->parent_id);
 
     }
 }

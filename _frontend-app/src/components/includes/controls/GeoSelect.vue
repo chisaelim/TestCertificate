@@ -1,8 +1,8 @@
 <template>
   <label>{{ label }}</label>
-  <VueMultiselect v-bind="$attrs" v-model="model" :options="options" track-by="id" label="name_kh" :allow-empty="true"
+  <VueMultiSelect v-bind="$attrs" v-model="model" :options="options" track-by="id" label="name_kh" :allow-empty="true"
     :searchable="true" :deselect-label="''" :select-label="''">
-  </VueMultiselect>
+  </VueMultiSelect>
 
 </template>
 <script setup>

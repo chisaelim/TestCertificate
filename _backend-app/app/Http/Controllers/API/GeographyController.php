@@ -26,24 +26,24 @@ class GeographyController extends Controller
         });
         return response(['provinces' => $provinces], 200);
     }
-    public function getDistrictsByProvinceID(GetDistrictsByProvinceIDRequest $request, $id)
+    public function getDistrictsByProvince(GetDistrictsByProvinceIDRequest $request, $id)
     {
         $districts = Cache::rememberForever('districtsCache' . $id, function () use ($id) {
-            return DistrictResource::collection(District::where('id_parent', $id)->get())->toArray(request());
+            return DistrictResource::collection(District::where('parent_id', $id)->get())->toArray(request());
         });
         return response(['districts' => $districts], 200);
     }
-    public function getCommunesByDistrictID(GetCommunesByDistrictIDRequest $request, $id)
+    public function getCommunesByDistrict(GetCommunesByDistrictIDRequest $request, $id)
     {
         $communes = Cache::rememberForever('communesCache' . $id, function () use ($id) {
-            return CommuneResource::collection(Commune::where('id_parent', $id)->get())->toArray(request());
+            return CommuneResource::collection(Commune::where('parent_id', $id)->get())->toArray(request());
         });
         return response(['communes' => $communes], 200);
     }
-    public function getVillagesByCommuneID(GetVillagesByCommuneIDRequest $request, $id)
+    public function getVillagesByCommune(GetVillagesByCommuneIDRequest $request, $id)
     {
         $villages = Cache::rememberForever('villagesCache' . $id, function () use ($id) {
-            return VillageResource::collection(Village::where('id_parent', $id)->get())->toArray(request());
+            return VillageResource::collection(Village::where('parent_id', $id)->get())->toArray(request());
         });
         return response(['villages' => $villages], 200);
     }

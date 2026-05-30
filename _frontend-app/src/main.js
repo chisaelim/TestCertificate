@@ -27,7 +27,9 @@ import App from './App.vue'
 import router from './router'
 import { useUserStore } from '@/stores/user';
 import { apiVerify } from '@/functions/api/auth';
-import VueMultiselect from 'vue-multiselect';
+import VueMultiSelect from 'vue-multiselect';
+import { VueDatePicker } from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 const app = createApp(App)
 
@@ -35,7 +37,8 @@ const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 app.use(pinia);
 app.use(router);
-app.component('VueMultiselect', VueMultiselect);
+app.component('VueMultiSelect', VueMultiSelect);
+app.component('VueDatePicker', VueDatePicker);
 app.mount('#app');
 
 

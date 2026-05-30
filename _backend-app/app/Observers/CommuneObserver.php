@@ -12,7 +12,7 @@ class CommuneObserver
      */
     public function created(Commune $commune): void
     {
-        Cache::forget('communesCache'.$commune->id_parent);
+        Cache::forget('communesCache' . $commune->parent_id);
     }
 
     /**
@@ -20,7 +20,7 @@ class CommuneObserver
      */
     public function updated(Commune $commune): void
     {
-        Cache::forget('communesCache'.$commune->id_parent);
+        Cache::forget('communesCache' . $commune->parent_id);
     }
 
     /**
@@ -28,7 +28,7 @@ class CommuneObserver
      */
     public function deleted(Commune $commune): void
     {
-        Cache::forget('communesCache'.$commune->id_parent);
+        Cache::forget('communesCache' . $commune->parent_id);
     }
 
     /**
@@ -36,7 +36,7 @@ class CommuneObserver
      */
     public function restored(Commune $commune): void
     {
-        Cache::forget('communesCache'.$commune->id_parent);
+        Cache::forget('communesCache' . $commune->parent_id);
     }
 
     /**
@@ -44,6 +44,6 @@ class CommuneObserver
      */
     public function forceDeleted(Commune $commune): void
     {
-        Cache::forget('communesCache'.$commune->id_parent);
+        Cache::forget('communesCache' . $commune->parent_id);
     }
 }

@@ -12,7 +12,7 @@ class DistrictObserver
      */
     public function created(District $district): void
     {
-        Cache::forget('districtsCache'.$district->id_parent);
+        Cache::forget('districtsCache' . $district->parent_id);
     }
 
     /**
@@ -20,7 +20,7 @@ class DistrictObserver
      */
     public function updated(District $district): void
     {
-        Cache::forget('districtsCache'.$district->id_parent);
+        Cache::forget('districtsCache' . $district->parent_id);
     }
 
     /**
@@ -28,7 +28,7 @@ class DistrictObserver
      */
     public function deleted(District $district): void
     {
-        Cache::forget('districtsCache'.$district->id_parent);
+        Cache::forget('districtsCache' . $district->parent_id);
     }
 
     /**
@@ -36,7 +36,7 @@ class DistrictObserver
      */
     public function restored(District $district): void
     {
-        Cache::forget('districtsCache'.$district->id_parent);
+        Cache::forget('districtsCache' . $district->parent_id);
     }
 
     /**
@@ -44,6 +44,6 @@ class DistrictObserver
      */
     public function forceDeleted(District $district): void
     {
-        Cache::forget('districtsCache'.$district->id_parent);
+        Cache::forget('districtsCache' . $district->parent_id);
     }
 }

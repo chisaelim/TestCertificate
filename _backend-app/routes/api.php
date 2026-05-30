@@ -30,9 +30,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update/profile-image', [AuthController::class, 'updateProfileImage']);
     Route::delete('/delete/profile-image', [AuthController::class, 'deleteProfileImage']);
 
-
-
-
     Route::prefix('/assets')->group(function () {
         Route::get('/all/genders', [AssetController::class, 'getAllGenders']);
         Route::get('/all/nationalities', [AssetController::class, 'getAllNationalities']);
@@ -41,16 +38,16 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::get('/provinces', [GeographyController::class, 'getProvinces']);
-    Route::get('/districts/by/province/{id}', [GeographyController::class, 'getDistrictsByProvinceID']);
-    Route::get('/communes/by/district/{id}', [GeographyController::class, 'getCommunesByDistrictID']);
-    Route::get('/villages/by/commune/{id}', [GeographyController::class, 'getVillagesByCommuneID']);
+    Route::get('/districts/by/province/{id}', [GeographyController::class, 'getDistrictsByProvince']);
+    Route::get('/communes/by/district/{id}', [GeographyController::class, 'getCommunesByDistrict']);
+    Route::get('/villages/by/commune/{id}', [GeographyController::class, 'getVillagesByCommune']);
 
     Route::middleware('_ADMINISTRATOR_')->group(function () {
         Route::prefix('/provinces')->group(function () {
-            Route::get('/read/{id_province}', [GeographyController::class, 'readProvince']);
+            Route::get('/read/{id}', [GeographyController::class, 'readProvince']);
             Route::post('/create', [GeographyController::class, 'createProvince']);
             Route::put('/update', [GeographyController::class, 'updateProvince']);
-            Route::delete('/delete/{id_province}', [GeographyController::class, 'deleteProvince']);
+            Route::delete('/delete/{id}', [GeographyController::class, 'deleteProvince']);
         });
         Route::prefix('/communes')->group(function () {
             Route::get('/read/{id}', [GeographyController::class, 'readCommune']);
@@ -75,9 +72,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/students')->group(function () {
         Route::get('/', [StudentController::class, 'getStudents']);
         Route::get('/details', [StudentController::class, 'getStudentsWithDetails']);
-        Route::get('/read/{id_student}', [StudentController::class, 'readStudent']);
+        Route::get('/read/{id}', [StudentController::class, 'readStudent']);
         Route::post('/create', [StudentController::class, 'createStudent']);
         Route::put('/update', [StudentController::class, 'updateStudent']);
-        Route::delete('/delete/{id_student}', [StudentController::class, 'deleteStudent']);
+        Route::delete('/delete/{id}', [StudentController::class, 'deleteStudent']);
     });
 });

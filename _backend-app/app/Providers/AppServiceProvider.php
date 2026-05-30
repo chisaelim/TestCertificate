@@ -27,7 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton('requested_at', function () {
+            return now();
+        });
     }
 
     /**

@@ -14,15 +14,15 @@
               <div class="col-12">
                 <div class="row">
                   <div class="col-lg-3">
-                    <!-- <CropperModal v-model="studentObj.image" v-model:current="currentImage"
-                      v-model:error="studentErrObj.image" :width="454" :height="454" /> -->
+                    <!-- <CropperModal v-model="studentObj.photo" v-model:current="currentImage"
+                      v-model:error="studentErrObj.photo" :width="454" :height="454" /> -->
                   </div>
                   <div class="col-lg-9">
                     <div class="row">
                       <div class="form-group col-lg-6">
                         <label>ឈ្មោះជាអក្សរខ្មែរ</label>
                         <input v-model="studentObj.name_kh" type="text" class="form-control"
-                          :class="{ 'is-invalid': studentErrObj.name_kh !== null }">
+                          :class="{ 'is-invalid': !!studentErrObj.name_kh }">
                         <div class="invalid-feedback">
                           {{ studentErrObj.name_kh }}
                         </div>
@@ -30,7 +30,7 @@
                       <div class="form-group col-lg-6">
                         <label>ឈ្មោះជាអក្សរឡាតាំង</label>
                         <input v-model="studentObj.name_en" type="text" class="form-control"
-                          :class="{ 'is-invalid': studentErrObj.name_en !== null }">
+                          :class="{ 'is-invalid': !!studentErrObj.name_en }">
                         <div class="invalid-feedback">
                           {{ studentErrObj.name_en }}
                         </div>
@@ -38,27 +38,32 @@
 
                     </div>
                     <div class="row">
-                      <div class="form-group col-lg-3">
+                      <div class="form-group col-lg-4">
                         <label>ភេទ</label>
                         <select v-model="studentObj.gender_id" class="form-control"
-                          :class="{ 'is-invalid': studentErrObj.gender_id !== null }">
-                          <option v-for="{ id, gender_kh_full } in genders" :key="id" :value="id">
-                            {{ gender_kh_full }}
+                          :class="{ 'is-invalid': !!studentErrObj.gender_id }">
+                          <option v-for="{ id, gd_kh_full } in genders" :key="id" :value="id">
+                            {{ gd_kh_full }}
                           </option>
                         </select>
                         <div class="invalid-feedback">
                           {{ studentErrObj.gender_id }}
                         </div>
                       </div>
-                      <div class="form-group col-lg-3">
+                      <div class="form-group col-lg-4">
                         <label>ថ្ងៃខែឆ្នាំកំណើត</label>
-                        <!-- <CustomDateInput v-model="studentObj.dob" :feedback="studentErrObj.dob" :id="'student-dob'" /> -->
+                        <VueDatePicker v-model="studentObj.dob" :formats="{ input: 'dd-MM-yyyy' }"
+                          model-type="dd-MM-yyyy" :time-config="{ enableTimePicker: false }"
+                          :class="{ 'is-invalid': !!studentErrObj.dob }" />
+                        <div class="invalid-feedback">
+                          {{ studentErrObj.dob }}
+                        </div>
                       </div>
-                      <div class="form-group col-lg-3">
+                      <div class="form-group col-lg-4">
                         <label>លេខទូរស័ព្ទ</label>
                         <div class="input-group">
                           <input v-model="studentObj.phone" type="text" class="form-control"
-                            :class="{ 'is-invalid': studentErrObj.phone !== null }">
+                            :class="{ 'is-invalid': !!studentErrObj.phone }">
                           <div class="input-group-append">
                             <div class="input-group-text">
                               <span class="fas fa-phone"></span>
@@ -69,15 +74,12 @@
                           </div>
                         </div>
                       </div>
-                      <div class="form-group col-lg-3">
-                        <!-- <JobInput v-model="studentObj.job" :feedback="studentErrObj.job" /> -->
-                      </div>
                     </div>
                     <div class="row">
                       <div class="form-group col-lg-4">
                         <label>ជនជាតិ</label>
                         <select v-model="studentObj.ethnicity_id" class="form-control"
-                          :class="{ 'is-invalid': studentErrObj.ethnicity_id !== null }">
+                          :class="{ 'is-invalid': !!studentErrObj.ethnicity_id }">
                           <option v-for="{ id, eth_kh } in ethnicities" :key="id" :value="id">
                             {{ eth_kh }}
                           </option>
@@ -89,7 +91,7 @@
                       <div class="form-group col-lg-4">
                         <label>សញ្ជាតិ</label>
                         <select v-model="studentObj.nationality_id" class="form-control"
-                          :class="{ 'is-invalid': studentErrObj.nationality_id !== null }">
+                          :class="{ 'is-invalid': !!studentErrObj.nationality_id }">
                           <option v-for="{ id, nat_kh } in nationalities" :key="id" :value="id">
                             {{ nat_kh }}
                           </option>
@@ -101,7 +103,7 @@
                       <div class="form-group col-lg-4">
                         <label>សាសនា</label>
                         <select v-model="studentObj.religion_id" class="form-control"
-                          :class="{ 'is-invalid': studentErrObj.religion_id !== null }">
+                          :class="{ 'is-invalid': !!studentErrObj.religion_id }">
                           <option v-for="{ id, rel_kh } in religions" :key="id" :value="id">
                             {{ rel_kh }}
                           </option>
@@ -120,7 +122,7 @@
                   <div class="form-group col-lg-3">
                     <label>ខេត្ត / រាជធានី</label>
                     <select v-model="studentObj.pob_province_id" class="form-control"
-                      :class="{ 'is-invalid': studentErrObj.pob_province_id !== null }">
+                      :class="{ 'is-invalid': !!studentErrObj.pob_province_id }">
                       <option :value="null">---none---</option>
                       <option v-for="{ id, name_kh } in provinces" :key="id" :value="id">
                         {{ name_kh }}
@@ -133,7 +135,7 @@
                   <div class="form-group col-lg-3">
                     <label>ស្រុក / ខណ្ឌ / ក្រុង</label>
                     <select v-model="studentObj.pob_district_id" class="form-control"
-                      :class="{ 'is-invalid': studentErrObj.pob_district_id !== null }">
+                      :class="{ 'is-invalid': !!studentErrObj.pob_district_id }">
                       <option :value="null">---none---</option>
                       <option v-for="{ id, name_kh } in pobDistricts" :key="id" :value="id">
                         {{ name_kh }}
@@ -146,7 +148,7 @@
                   <div class="form-group col-lg-3">
                     <label>ឃុំ / សង្កាត់</label>
                     <select v-model="studentObj.pob_commune_id" class="form-control"
-                      :class="{ 'is-invalid': studentErrObj.pob_commune_id !== null }">
+                      :class="{ 'is-invalid': !!studentErrObj.pob_commune_id }">
                       <option :value="null">---none---</option>
                       <option v-for="{ id, name_kh } in pobCommunes" :key="id" :value="id">
                         {{ name_kh }}
@@ -159,7 +161,7 @@
                   <div class="form-group col-lg-3">
                     <label>ភូមិ</label>
                     <select v-model="studentObj.pob_village_id" class="form-control"
-                      :class="{ 'is-invalid': studentErrObj.pob_village_id !== null }">
+                      :class="{ 'is-invalid': !!studentErrObj.pob_village_id }">
                       <option :value="null">---none---</option>
                       <option v-for="{ id, name_kh } in pobVillages" :key="id" :value="id">
                         {{ name_kh }}
@@ -177,7 +179,7 @@
                   <div class="form-group col-lg-3">
                     <label>ខេត្ត / រាជធានី</label>
                     <select v-model="studentObj.por_province_id" class="form-control"
-                      :class="{ 'is-invalid': studentErrObj.por_province_id !== null }">
+                      :class="{ 'is-invalid': !!studentErrObj.por_province_id }">
                       <option :value="null">---none---</option>
                       <option v-for="{ id, name_kh } in provinces" :key="id" :value="id">
                         {{ name_kh }}
@@ -190,7 +192,7 @@
                   <div class="form-group col-lg-3">
                     <label>ស្រុក / ខណ្ឌ / ក្រុង</label>
                     <select v-model="studentObj.por_district_id" class="form-control"
-                      :class="{ 'is-invalid': studentErrObj.por_district_id !== null }">
+                      :class="{ 'is-invalid': !!studentErrObj.por_district_id }">
                       <option :value="null">---none---</option>
                       <option v-for="{ id, name_kh } in porDistricts" :key="id" :value="id">
                         {{ name_kh }}
@@ -203,7 +205,7 @@
                   <div class="form-group col-lg-3">
                     <label>ឃុំ / សង្កាត់</label>
                     <select v-model="studentObj.por_commune_id" class="form-control"
-                      :class="{ 'is-invalid': studentErrObj.por_commune_id !== null }">
+                      :class="{ 'is-invalid': !!studentErrObj.por_commune_id }">
                       <option :value="null">---none---</option>
                       <option v-for="{ id, name_kh } in porCommunes" :key="id" :value="id">
                         {{ name_kh }}
@@ -216,7 +218,7 @@
                   <div class="form-group col-lg-3">
                     <label>ភូមិ</label>
                     <select v-model="studentObj.por_village_id" class="form-control"
-                      :class="{ 'is-invalid': studentErrObj.por_village_id !== null }">
+                      :class="{ 'is-invalid': !!studentErrObj.por_village_id }">
                       <option :value="null">---none---</option>
                       <option v-for="{ id, name_kh } in porVillages" :key="id" :value="id">
                         {{ name_kh }}
@@ -231,7 +233,7 @@
                   <div class="form-group col-lg-6">
                     <label>លេខផ្ទះ</label>
                     <input v-model="studentObj.home_no" type="text" class="form-control"
-                      :class="{ 'is-invalid': studentErrObj.home_no !== null }">
+                      :class="{ 'is-invalid': !!studentErrObj.home_no }">
                     <div class="invalid-feedback">
                       {{ studentErrObj.home_no }}
                     </div>
@@ -239,7 +241,7 @@
                   <div class="form-group col-lg-6">
                     <label>លេខផ្លូវ</label>
                     <input v-model="studentObj.street_no" type="text" class="form-control"
-                      :class="{ 'is-invalid': studentErrObj.street_no !== null }">
+                      :class="{ 'is-invalid': !!studentErrObj.street_no }">
                     <div class="invalid-feedback">
                       {{ studentErrObj.street_no }}
                     </div>
@@ -287,15 +289,14 @@ const porCommunes = ref([]);
 const porVillages = ref([]);
 
 const studentObj = reactive({
-  id_student: null,
+  id: null,
   name_en: null,
   name_kh: null,
   dob: null,
-  job: null,
   home_no: null,
   street_no: null,
   phone: null,
-  image: null,
+  photo: null,
   gender_id: 1,
   nationality_id: 1,
   ethnicity_id: 1,
@@ -313,11 +314,10 @@ const studentErrObj = reactive({
   name_en: null,
   name_kh: null,
   dob: null,
-  job: null,
   home_no: null,
   street_no: null,
   phone: null,
-  image: null,
+  photo: null,
   gender_id: null,
   nationality_id: null,
   ethnicity_id: null,
@@ -408,10 +408,10 @@ async function saveStudent() {
       res = await apiCreateStudent(studentObj);
       props.onCreated(res.data.student);
     } else {
-      if (currentImage.value !== studentObj.image) {
+      if (currentImage.value !== studentObj.photo) {
         res = await apiUpdateStudent(studentObj);
       } else {
-        const { image, ...obj } = studentObj;
+        const { photo, ...obj } = studentObj;
         res = await apiUpdateStudent(obj);
       }
       props.onUpdated(res.data.student);
@@ -435,22 +435,22 @@ async function saveStudent() {
     return MessageModal({ icon: "error", title: "Error", text: data.message });
   }
 }
-async function viewStudent(id_student) {
+async function viewStudent(id) {
   try {
     LoadingModal();
-    const res = await apiReadStudent(id_student);
-    const { image, ...newStudentObj } = res.data.student;
+    const res = await apiReadStudent(id);
+    const { photo, ...newStudentObj } = res.data.student;
     Object.assign(studentObj, newStudentObj);
-    studentObj.image = image;
-    currentImage.value = image;
+    studentObj.photo = photo;
+    currentImage.value = photo;
     showStudentModal();
     return CloseModal();
   } catch (error) {
     return ErrorModal(error);
   }
 }
-async function removeStudent(id_student) {
-  $swal.fire({
+async function removeStudent(id) {
+  Swal.fire({
     title: 'Want to delete the student ?',
     html: '<pre>' + "Please make a confirmation." + '</pre>',
     icon: 'question',
@@ -461,7 +461,7 @@ async function removeStudent(id_student) {
     if (sw.isConfirmed) {
       try {
         LoadingModal();
-        const res = await apiDeleteStudent(id_student);
+        const res = await apiDeleteStudent(id);
         const { student, message } = res.data;
         props.onDeleted(student);
         return MessageModal({ icon: "success", title: "Success", text: message });
@@ -515,7 +515,7 @@ async function generateProvinces() {
 async function generateDistrictsByProvince(id) {
   try {
     const res = await apiGetDistrictsByProvince(id);
-    districts.value = res.data.districts;
+    return res;
   } catch (error) {
     throw error;
   }
@@ -523,7 +523,7 @@ async function generateDistrictsByProvince(id) {
 async function generateCommunesByDistrict(id) {
   try {
     const res = await apiGetCommunesByDistrict(id);
-    communes.value = res.data.communes;
+    return res;
   } catch (error) {
     throw error;
   }
@@ -531,7 +531,7 @@ async function generateCommunesByDistrict(id) {
 async function generateVillagesByCommune(id) {
   try {
     const res = await apiGetVillagesByCommune(id);
-    villages.value = res.data.villages;
+    return res;
   } catch (error) {
     throw error;
   }

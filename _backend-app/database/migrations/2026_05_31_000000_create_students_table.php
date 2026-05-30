@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->string('name_en', 250);
             $table->string('name_kh', 250);
             $table->string('dob', 10);
-            $table->string('job', 250)->nullable();
             $table->string('home_no', 25)->nullable();
             $table->string('street_no', 25)->nullable();
             $table->string('phone', 10)->nullable();

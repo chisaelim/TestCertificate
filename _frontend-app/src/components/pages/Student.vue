@@ -37,20 +37,20 @@ const StudentModalRef = ref();
 
 const students = ref([]);
 const columns = [
-  {
-    accessorKey: "photo",
-    header: "",
-    cell: (cell) =>
-      h("img", {
-        style: "max-width: 50px",
-        class: "profile-user-img img-fluid img-circle",
-        src:
-          cell.getValue() !== null
-            ? "/storage/images/students/thumbnails/" + cell.getValue()
-            : "/assets/images/emptyProfile.png",
-        alt: "student image",
-      }),
-  },
+  // {
+  //   accessorKey: "photo",
+  //   header: "",
+  //   cell: (cell) =>
+  //     h("img", {
+  //       style: "max-width: 50px",
+  //       class: "profile-user-img img-fluid img-circle",
+  //       src:
+  //         cell.getValue() !== null
+  //           ? "/storage/images/students/thumbnails/" + cell.getValue()
+  //           : "/assets/images/emptyProfile.png",
+  //       alt: "student image",
+  //     }),
+  // },
   {
     accessorKey: 'name_kh',
     header: 'ឈ្មោះជាអក្សរខ្មែរ',
@@ -60,7 +60,7 @@ const columns = [
     header: 'ឈ្មោះជាអក្សរឡាតាំង',
   },
   {
-    accessorKey: 'gender.gender_kh_full',
+    accessorKey: 'gender.gd_kh_full',
     header: 'ភេទ',
   },
   {
@@ -85,7 +85,7 @@ const columns = [
         // delete btn
         h('button',
           {
-            onClick: () => StudentModalRef.value.removeStudent(row.original.id_student),
+            onClick: () => StudentModalRef.value.removeStudent(row.original.id),
             class: 'btn btn-sm btn-outline-danger mx-1'
           },
           h('i', { class: 'fa fa-trash' })
@@ -93,7 +93,7 @@ const columns = [
         // view btn
         h('button',
           {
-            onClick: () => StudentModalRef.value.viewStudent(row.original.id_student),
+            onClick: () => StudentModalRef.value.viewStudent(row.original.id),
             class: 'btn btn-sm btn-secondary mx-1'
           },
           h('i', { class: 'fa fa-eye' })
@@ -130,9 +130,9 @@ const onStudentCreated = (student) => {
   students.value = [...students.value, student];
 };
 const onStudentUpdated = (student) => {
-  students.value = students.value.map(obj => obj.id_student !== student.id_student ? obj : student);
+  students.value = students.value.map(obj => obj.id !== student.id ? obj : student);
 };
 const onStudentDeleted = (student) => {
-  students.value = students.value.filter(obj => obj.id_student !== student.id_student);
+  students.value = students.value.filter(obj => obj.id !== student.id);
 };
 </script>

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Resources\Student\StudentResource;
-use App\Services\ImageService;
+use App\Http\Resources\Student\DetailStudentResource;
+use App\Services\ImageClassService;
 use Exception;
 use Illuminate\Http\Request;
 use Throwable;
@@ -14,7 +15,6 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Student\CreateStudentRequest;
 use App\Http\Requests\Student\UpdateStudentRequest;
-use App\Http\Resources\Student\ManageStudentResource;
 use Illuminate\Validation\ValidationException;
 
 class StudentController extends Controller
@@ -65,7 +65,7 @@ class StudentController extends Controller
 
         return response(
             [
-                'students' => StudentResource::collection($students),
+                'students' => DetailStudentResource::collection($students),
             ],
             200,
         );
@@ -73,20 +73,21 @@ class StudentController extends Controller
 
     public function createStudent(CreateStudentRequest $request)
     {
+        $imageClass = ImageClassService::forStudentModel();
         $validated = $request->validated();
 
-        $id_pob = $this->resolveGeography(
-            $validated['id_pob_province'] ?? null,
-            $validated['id_pob_district'] ?? null,
-            $validated['id_pob_commune'] ?? null,
-            $validated['id_pob_village'] ?? null,
+        $place_of_birth_id = $this->resolveGeography(
+            $validated['pob_province_id'] ?? null,
+            $validated['pob_district_id'] ?? null,
+            $validated['pob_commune_id'] ?? null,
+            $validated['pob_village_id'] ?? null,
         );
 
-        $id_por = $this->resolveGeography(
-            $validated['id_por_province'] ?? null,
-            $validated['id_por_district'] ?? null,
-            $validated['id_por_commune'] ?? null,
-            $validated['id_por_village'] ?? null,
+        $place_of_residence_id = $this->resolveGeography(
+            $validated['por_province_id'] ?? null,
+            $validated['por_district_id'] ?? null,
+            $validated['por_commune_id'] ?? null,
+            $validated['por_village_id'] ?? null,
         );
 
         $phone = $validated['phone'];
@@ -100,37 +101,34 @@ class StudentController extends Controller
         try {
             DB::beginTransaction();
 
-            $photo_name = null;
-            if (!empty($validated['photo'])) {
-                $photo_name = ImageService::storeProfileImage($validated['photo'], 'students');
+            $newImage = null;
+            if (!empty($validated['image'])) {
+                $newImage = $imageClass->store($request->file('image'));
             }
 
             $student = Student::create([
                 'name_kh' => $validated['name_kh'],
                 'name_en' => strtoupper($validated['name_en']),
                 'dob' => $validated['dob'],
-                'job' => $validated['job'],
                 'home_no' => $validated['home_no'],
                 'street_no' => $validated['street_no'],
                 'phone' => $phone,
-                'photo' => $photo_name,
-                'id_gender' => $validated['id_gender'],
-                'id_ethnicity' => $validated['id_ethnicity'],
-                'id_nationality' => $validated['id_nationality'],
-                'id_religion' => $validated['id_religion'],
-                'id_pob' => $id_pob,
-                'id_por' => $id_por,
+                'photo' => $newImage,
+                'gender_id' => $validated['gender_id'],
+                'ethnicity_id' => $validated['ethnicity_id'],
+                'nationality_id' => $validated['nationality_id'],
+                'religion_id' => $validated['religion_id'],
+                'place_of_birth_id' => $place_of_birth_id,
+                'place_of_residence_id' => $place_of_residence_id,
             ]);
 
-            $student = Student::where('id_student', $student->id_student)
+            $student = Student::where('id', $student->id)
                 ->with($this->manageEagerLoading)
                 ->first();
 
             DB::commit();
-        } catch (Exception $e) {
-            DB::rollback();
-            throw $e;
         } catch (Throwable $th) {
+            $imageClass->delete($newImage);
             DB::rollback();
             throw $th;
         }
@@ -138,15 +136,15 @@ class StudentController extends Controller
         return response(
             [
                 'message' => 'The student has been created.',
-                'student' => new ManageStudentResource($student),
+                'student' => new DetailStudentResource($student),
             ],
             201,
         );
     }
 
-    public function readStudent($id_student)
+    public function readStudent($id)
     {
-        $student = Student::where('id_student', $id_student)
+        $student = Student::where('id', $id)
             ->with($this->readEagerLoading)
             ->first();
 
@@ -156,7 +154,7 @@ class StudentController extends Controller
 
         return response(
             [
-                'student' => new ManageStudentResource($student),
+                'student' => new DetailStudentResource($student),
             ],
             200,
         );
@@ -164,31 +162,36 @@ class StudentController extends Controller
 
     public function updateStudent(UpdateStudentRequest $request)
     {
-        $validated = $request->validated();
-        $id_student = $validated['id_student'];
 
-        $student = Student::find($id_student);
+        $imageClass = ImageClassService::forStudentModel();
+        $newImage = null;
+        $validated = $request->validated();
+        $id = $validated['id'];
+
+        $student = Student::find($id);
         if (!$student) {
             return ResponseHelper::notFoundErrorMsg();
         }
+        $oldImage = $student->getRawOriginal('photo');
 
-        $id_pob = $this->resolveGeography(
-            $validated['id_pob_province'] ?? null,
-            $validated['id_pob_district'] ?? null,
-            $validated['id_pob_commune'] ?? null,
-            $validated['id_pob_village'] ?? null,
+
+        $place_of_birth_id = $this->resolveGeography(
+            $validated['pob_province_id'] ?? null,
+            $validated['pob_district_id'] ?? null,
+            $validated['pob_commune_id'] ?? null,
+            $validated['pob_village_id'] ?? null,
         );
 
-        $id_por = $this->resolveGeography(
-            $validated['id_por_province'] ?? null,
-            $validated['id_por_district'] ?? null,
-            $validated['id_por_commune'] ?? null,
-            $validated['id_por_village'] ?? null,
+        $place_of_residence_id = $this->resolveGeography(
+            $validated['por_province_id'] ?? null,
+            $validated['por_district_id'] ?? null,
+            $validated['por_commune_id'] ?? null,
+            $validated['por_village_id'] ?? null,
         );
 
         $phone = $validated['phone'];
         $existed = Student::where('phone', $phone)->first();
-        if ($existed && $existed->id_student !== $id_student) {
+        if ($existed && $existed->id !== $id) {
             if (strcasecmp($existed->phone, $phone) === 0) {
                 throw ValidationException::withMessages([
                     'phone' => 'លេខទូរស័ព្ទមានក្នុងប្រព័ន្ធរួចហើយ។',
@@ -199,39 +202,41 @@ class StudentController extends Controller
         try {
             DB::beginTransaction();
 
-            if ($request->has('photo')) {
-                $photo_name = null;
-                ImageService::removeProfileImage($student->photo, 'students');
-                if (!empty($validated['photo'])) {
-                    $photo_name = ImageService::storeProfileImage($validated['photo'], 'students');
+            if ($request->has('image')) {
+                if (!empty($validated['image'])) {
+                    $newImage = $imageClass->store($request->file('image'));
                 }
-                $student->photo = $photo_name;
+                $student->photo = $newImage;
             }
 
             $student->name_kh = $validated['name_kh'];
             $student->name_en = strtoupper($validated['name_en']);
             $student->dob = $validated['dob'];
-            $student->job = $validated['job'];
             $student->home_no = $validated['home_no'];
             $student->street_no = $validated['street_no'];
             $student->phone = $phone;
-            $student->id_gender = $validated['id_gender'];
-            $student->id_ethnicity = $validated['id_ethnicity'];
-            $student->id_nationality = $validated['id_nationality'];
-            $student->id_religion = $validated['id_religion'];
-            $student->id_pob = $id_pob;
-            $student->id_por = $id_por;
+            $student->gender_id = $validated['gender_id'];
+            $student->ethnicity_id = $validated['ethnicity_id'];
+            $student->nationality_id = $validated['nationality_id'];
+            $student->religion_id = $validated['religion_id'];
+            $student->place_of_birth_id = $place_of_birth_id;
+            $student->place_of_residence_id = $place_of_residence_id;
 
             $updated = $student->save();
             if (!$updated) {
+                $imageClass->delete($newImage);
+                DB::rollback();
                 return ResponseHelper::updateErrorMsg();
             }
 
             DB::commit();
-        } catch (Exception $e) {
-            DB::rollback();
-            throw $e;
+
+            // Delete old image only after DB commit succeeds
+            if ($request->has('image')) {
+                $imageClass->delete($oldImage);
+            }
         } catch (Throwable $th) {
+            $imageClass->delete($newImage);
             DB::rollback();
             throw $th;
         }
@@ -239,15 +244,15 @@ class StudentController extends Controller
         return response(
             [
                 'message' => 'The student has been updated.',
-                'student' => new ManageStudentResource($student->load($this->manageEagerLoading)),
+                'student' => new DetailStudentResource($student->load($this->manageEagerLoading)),
             ],
             200,
         );
     }
 
-    public function deleteStudent($id_student)
+    public function deleteStudent($id)
     {
-        $student = Student::where('id_student', $id_student)
+        $student = Student::where('id', $id)
             ->with($this->manageEagerLoading)
             ->first();
 
@@ -266,48 +271,48 @@ class StudentController extends Controller
         return response(
             [
                 'message' => 'The student has been deleted.',
-                'student' => new ManageStudentResource($student),
+                'student' => new DetailStudentResource($student),
             ],
             200,
         );
     }
 
-    private function resolveGeography($id_province, $id_district, $id_commune, $id_village)
+    private function resolveGeography($province_id, $district_id, $commune_id, $village_id)
     {
-        $id_geography = null;
+        $geography_id = null;
 
-        if ($id_province) {
-            $province = Province::find($id_province);
+        if ($province_id) {
+            $province = Province::find($province_id);
             if (!$province) {
                 return ResponseHelper::requirementErrorMsg();
             }
-            $id_geography = $province->id_geography;
+            $geography_id = $province->id;
         }
 
-        if ($id_district) {
-            $district = $province->districts->find($id_district);
+        if ($district_id) {
+            $district = $province->districts->find($district_id);
             if (!$district) {
                 return ResponseHelper::requirementErrorMsg();
             }
-            $id_geography = $district->id_geography;
+            $geography_id = $district->id;
         }
 
-        if ($id_commune) {
-            $commune = $district->communes->find($id_commune);
+        if ($commune_id) {
+            $commune = $district->communes->find($commune_id);
             if (!$commune) {
                 return ResponseHelper::requirementErrorMsg();
             }
-            $id_geography = $commune->id_geography;
+            $geography_id = $commune->id;
         }
 
-        if ($id_village) {
-            $village = $commune->villages->find($id_village);
+        if ($village_id) {
+            $village = $commune->villages->find($village_id);
             if (!$village) {
                 return ResponseHelper::requirementErrorMsg();
             }
-            $id_geography = $village->id_geography;
+            $geography_id = $village->id;
         }
 
-        return $id_geography;
+        return $geography_id;
     }
 }
