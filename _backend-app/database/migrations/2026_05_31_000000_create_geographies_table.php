@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('name_kh', 250);
             $table->string('name_latin', 250);
             $table->enum('unit_en', ['Village', 'Commune', 'Quarter', 'District', 'Section', 'Municipality', 'Province', 'Capital']);
-            $table->enum('unit_kh', ['Villages', 'ឃុំ', 'សង្កាត់', 'ស្រុក', 'ខណ្ឌ', 'ក្រុង', 'ខេត្ត', 'រាជធានី']);
+            $table->enum('unit_kh', ['ភូមិ', 'ឃុំ', 'សង្កាត់', 'ស្រុក', 'ខណ្ឌ', 'ក្រុង', 'ខេត្ត', 'រាជធានី']);
             $table->enum('unit_latin', ['Phum', 'Khum', 'Sangkat', 'Srok', 'Khan', 'Khaet', 'Krong', 'Reach Theani']);
             $table->unsignedBigInteger('parent_id')->index('parent_id')->nullable();
         });
