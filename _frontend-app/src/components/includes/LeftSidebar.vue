@@ -53,50 +53,16 @@
             </router-link>
           </li>
           <li class="nav-header" v-if="userStore.isAdministrator">
-            System Credentials
+            Academic Management
           </li>
 
-          <!-- <li class="nav-item" v-if="userStore.isAdministrator">
-              <router-link :to="{ name: 'users' }" active-class="active" class="nav-link">
-                <i class="nav-icon fas fa-users-cog"></i>
-                <p>Users</p>
-              </router-link>
-            </li> -->
           <li class="nav-item" v-if="userStore.isAdministrator">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-globe"></i>
-              <p>
-                Geographies
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Capitals / Provinces</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Municipalities / Sections / Districts</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Quaters / Communes</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Villages</p>
-                </a>
-              </li>
-            </ul>
+            <router-link :to="{ name: 'students' }" active-class="active" class="nav-link">
+              <i class="nav-icon fas fa-user-graduate"></i>
+              <p>Students</p>
+            </router-link>
           </li>
+
         </ul>
       </nav>
     </div>

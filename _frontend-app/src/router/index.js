@@ -14,6 +14,7 @@ import Navbar from "@/components/includes/Navbar.vue";
 import LeftSidebar from "@/components/includes/LeftSidebar.vue";
 import RightSidebar from "@/components/includes/RightSidebar.vue";
 import Footer from "@/components/includes/Footer.vue";
+import Student from '@/components/pages/Student.vue';
 
 const includeComponents = {
   navbar: Navbar,
@@ -82,6 +83,15 @@ const router = createRouter({
       name: 'profile',
       components: {
         default: Profile,
+        ...includeComponents
+      },
+      meta: { guarded: true },
+    },
+    {
+      path: '/students',
+      name: 'students',
+      components: {
+        default: Student,
         ...includeComponents
       },
       meta: { guarded: true },

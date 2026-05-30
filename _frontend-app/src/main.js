@@ -1,11 +1,9 @@
-import Swal from 'sweetalert2';
-window.Swal = Swal;
-
-import jquery from 'jquery';
-window.$ = window.jQuery = jquery;
-
 import axios from 'axios';
 window.axios = axios;
+import jquery from 'jquery';
+window.$ = window.jQuery = jquery;
+import Swal from 'sweetalert2';
+window.Swal = Swal;
 
 import { LoadingModal, MessageModal, CloseModal, ErrorModal } from './functions/swal';
 window.LoadingModal = LoadingModal;
@@ -21,8 +19,6 @@ window.APP_GOOGLE_OAUTH_CALLBACK_URL = import.meta.env.VITE_APP_GOOGLE_OAUTH_CAL
 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'admin-lte/dist/js/adminlte.min.js';
-
-
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
