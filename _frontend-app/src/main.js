@@ -1,12 +1,25 @@
+import jquery from 'jquery';
+window.$ = window.jQuery = jquery;
+
+import axios from 'axios';
+window.axios = axios;
+
+window.APP_URL = import.meta.env.VITE_APP_URL;
+window.APP_API_URL = import.meta.env.VITE_APP_API_URL;
+window.APP_VERIFY_EMAIL_URL = import.meta.env.VITE_APP_VERIFY_EMAIL_URL;
+window.APP_RESET_PASSWORD_URL = import.meta.env.VITE_APP_RESET_PASSWORD_URL;
+window.APP_GOOGLE_OAUTH_CALLBACK_URL = import.meta.env.VITE_APP_GOOGLE_OAUTH_CALLBACK_URL;
+
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'admin-lte/dist/js/adminlte.min.js';
+
+
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import App from './App.vue'
 import router from './router'
-import axios from 'axios';
 import { useUserStore } from '@/stores/user';
 import { apiVerify } from '@/functions/api/auth';
 

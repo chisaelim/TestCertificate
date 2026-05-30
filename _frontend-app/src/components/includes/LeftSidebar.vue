@@ -52,6 +52,51 @@
               </p>
             </router-link>
           </li>
+          <li class="nav-header" v-if="userStore.isAdministrator">
+            System Credentials
+          </li>
+
+          <!-- <li class="nav-item" v-if="userStore.isAdministrator">
+              <router-link :to="{ name: 'users' }" active-class="active" class="nav-link">
+                <i class="nav-icon fas fa-users-cog"></i>
+                <p>Users</p>
+              </router-link>
+            </li> -->
+          <li class="nav-item" v-if="userStore.isAdministrator">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-globe"></i>
+              <p>
+                Geographies
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link :to="{ name: 'provinces' }" active-class="active" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Capitals / Provinces</p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link :to="{ name: 'districts' }" active-class="active" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Municipalities / Sections / Districts</p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link :to="{ name: 'communes' }" active-class="active" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Quaters / Communes</p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link :to="{ name: 'villages' }" active-class="active" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Villages</p>
+                </router-link>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>
@@ -61,6 +106,21 @@
 import emptyImage from '@/assets/images/emptyImage.png';
 import logoImage from '@/assets/images/logoImage.webp';
 import { useUserStore } from '@/stores/user';
+const route = useRoute();
 
 const userStore = useUserStore();
+
+function syncTreeviewActiveState() {
+  $('[data-widget="treeview"]').Treeview("init");
+  const $navItems = $('li.nav-item:has(ul.nav-treeview)');
+  $navItems.removeClass("menu-is-opening menu-open");
+  $navItems.children("ul.nav-treeview").hide();
+  $navItems.has("a.nav-link.active").addClass("menu-is-opening menu-open").children("ul.nav-treeview").show();
+}
+
+onMounted(() => {
+  nextTick(syncTreeviewActiveState);
+});
+
+watch(() => route.fullPath, () => nextTick(syncTreeviewActiveState));
 </script>

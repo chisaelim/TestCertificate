@@ -30,7 +30,7 @@ class Geography extends Model
         return $this->belongsTo(Geography::class, 'parent_id');
     }
 
-    public function children()
+    public function childrens()
     {
         return $this->hasMany(Geography::class, 'parent_id');
     }

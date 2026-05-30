@@ -15,6 +15,18 @@ import LeftSidebar from "@/components/includes/LeftSidebar.vue";
 import RightSidebar from "@/components/includes/RightSidebar.vue";
 import Footer from "@/components/includes/Footer.vue";
 
+import Province from '@/components/pages/geographies/Province.vue';
+import District from '@/components/pages/geographies/District.vue';
+import Commune from '@/components/pages/geographies/Commune.vue';
+import Village from '@/components/pages/geographies/Village.vue';
+
+const includeComponents = {
+  navbar: Navbar,
+  left_sidebar: LeftSidebar,
+  right_sidebar: RightSidebar,
+  footer: Footer,
+};
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -66,10 +78,7 @@ const router = createRouter({
       name: 'dashboard',
       components: {
         default: Dashboard,
-        navbar: Navbar,
-        left_sidebar: LeftSidebar,
-        right_sidebar: RightSidebar,
-        footer: Footer,
+        ...includeComponents
       },
       meta: { guarded: true },
     },
@@ -78,12 +87,49 @@ const router = createRouter({
       name: 'profile',
       components: {
         default: Profile,
-        navbar: Navbar,
-        left_sidebar: LeftSidebar,
-        rightSidebar: RightSidebar,
-        footer: Footer,
+        ...includeComponents
       },
       meta: { guarded: true },
+    },
+    {
+      path: '/provinces',
+      name: 'provinces',
+      components: {
+        default: Province,
+        ...includeComponents
+      },
+      meta: { guarded: true, levels: ['_ADMINISTRATOR_'] },
+
+    },
+    {
+      path: '/districts/:id_province(\\d+)?',
+      name: 'districts',
+      components: {
+        default: District,
+        ...includeComponents
+      },
+      meta: { guarded: true, levels: ['_ADMINISTRATOR_'] },
+
+    },
+    {
+      path: '/communes/:id_province(\\d+)?/:id_district(\\d+)?',
+      name: 'communes',
+      components: {
+        default: Commune,
+        ...includeComponents
+      },
+      meta: { guarded: true, levels: ['_ADMINISTRATOR_'] },
+
+    },
+    {
+      path: '/villages/:id_province(\\d+)?/:id_district(\\d+)?/:id_commune(\\d+)?',
+      name: 'villages',
+      components: {
+        default: Village,
+        ...includeComponents
+      },
+      meta: { guarded: true, levels: ['_ADMINISTRATOR_'] },
+
     },
     {
       path: '/:pathMatch(.*)*',
