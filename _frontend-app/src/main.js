@@ -4,6 +4,8 @@ import jquery from 'jquery';
 window.$ = window.jQuery = jquery;
 import Swal from 'sweetalert2';
 window.Swal = Swal;
+import { uuidv7 } from "uuidv7";
+window.uuid = uuidv7;
 
 import { LoadingModal, MessageModal, CloseModal, ErrorModal } from './functions/swal';
 window.LoadingModal = LoadingModal;

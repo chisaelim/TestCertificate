@@ -13,6 +13,6 @@ class ImageClassService
 
     public static function forStudentModel(): ImageClass
     {
-        return new ImageClass('public', 'students/images', 128);
+        return new ImageClass('public', 'students/profile-images', 128);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\ImageClassService;
 use Carbon\Carbon;
 use App\Traits\TimeStamps;
 use App\Traits\TracksCreator;
@@ -73,33 +74,29 @@ class Student extends Model
         );
     }
 
-    protected function photo5x5(): Attribute
+    // photo related methods and attributes
+    protected function photo(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->photo ? Storage::disk('public')->url("images/students/5x5/{$this->photo}") : null
+            get: function () {
+                $imageClass = ImageClassService::forStudentModel();
+                $imagePath = $this->getRawOriginal('photo');
+                return $imageClass->fullUrl($imagePath);
+            },
         );
     }
 
-    protected function photo3x4(): Attribute
+    protected function thumbnail(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->photo ? Storage::disk('public')->url("images/students/3x4/{$this->photo}") : null
+            get: function () {
+                $imageClass = ImageClassService::forStudentModel();
+                $thumbnailPath = $imageClass->thumbnailPath($this->getRawOriginal('photo'));
+                return $imageClass->fullUrl($thumbnailPath);
+            },
         );
     }
-
-    protected function photo4x6(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->photo ? Storage::disk('public')->url("images/students/4x6/{$this->photo}") : null
-        );
-    }
-
-    protected function thumbNail(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->photo ? Storage::disk('public')->url("images/students/thumbnails/{$this->photo}") : null
-        );
-    }
+    // end photo related methods and attributes
 
     public function gender()
     {

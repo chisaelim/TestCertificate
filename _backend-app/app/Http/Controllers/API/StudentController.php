@@ -90,14 +90,6 @@ class StudentController extends Controller
             $validated['por_village_id'] ?? null,
         );
 
-        $phone = $validated['phone'];
-        $existed = Student::where('phone', $phone)->first();
-        if ($existed && strcasecmp($existed->phone, $phone) === 0) {
-            throw ValidationException::withMessages([
-                'phone' => 'លេខទូរស័ព្ទមានក្នុងប្រព័ន្ធរួចហើយ។',
-            ]);
-        }
-
         try {
             DB::beginTransaction();
 
@@ -112,7 +104,7 @@ class StudentController extends Controller
                 'dob' => $validated['dob'],
                 'home_no' => $validated['home_no'],
                 'street_no' => $validated['street_no'],
-                'phone' => $phone,
+                'phone' => $validated['phone'],
                 'photo' => $newImage,
                 'gender_id' => $validated['gender_id'],
                 'ethnicity_id' => $validated['ethnicity_id'],
@@ -189,16 +181,6 @@ class StudentController extends Controller
             $validated['por_village_id'] ?? null,
         );
 
-        $phone = $validated['phone'];
-        $existed = Student::where('phone', $phone)->first();
-        if ($existed && $existed->id !== $id) {
-            if (strcasecmp($existed->phone, $phone) === 0) {
-                throw ValidationException::withMessages([
-                    'phone' => 'លេខទូរស័ព្ទមានក្នុងប្រព័ន្ធរួចហើយ។',
-                ]);
-            }
-        }
-
         try {
             DB::beginTransaction();
 
@@ -214,7 +196,7 @@ class StudentController extends Controller
             $student->dob = $validated['dob'];
             $student->home_no = $validated['home_no'];
             $student->street_no = $validated['street_no'];
-            $student->phone = $phone;
+            $student->phone = $validated['phone'];
             $student->gender_id = $validated['gender_id'];
             $student->ethnicity_id = $validated['ethnicity_id'];
             $student->nationality_id = $validated['nationality_id'];

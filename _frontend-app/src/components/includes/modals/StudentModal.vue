@@ -14,8 +14,8 @@
               <div class="col-12">
                 <div class="row">
                   <div class="col-lg-3">
-                    <!-- <CropperModal v-model="studentObj.photo" v-model:current="currentImage"
-                      v-model:error="studentErrObj.photo" :width="454" :height="454" /> -->
+                    <CropperModal v-model="studentObj.photo" v-model:current="currentImage"
+                      v-model:error="studentErrObj.photo" :width="454" :height="454" />
                   </div>
                   <div class="col-lg-9">
                     <div class="row">
@@ -400,20 +400,29 @@ watch(() => studentObj.por_commune_id, async (nv, ov) => {
   }
 });
 
+async function buildFormData(data, includePhoto) {
+  const form = new FormData();
+  Object.entries(data).forEach(([key, value]) => {
+    if (key === 'photo') return;
+    if (value !== null && value !== undefined) form.append(key, value);
+  });
+  if (includePhoto && data.photo) {
+    const blob = await (await fetch(data.photo)).blob();
+    form.append('photo', blob, 'photo.jpg');
+  }
+  return form;
+}
+
 async function saveStudent() {
   try {
     LoadingModal();
     let res = null;
     if (studentObj.id === null) {
-      res = await apiCreateStudent(studentObj);
+      res = await apiCreateStudent(await buildFormData(studentObj, true));
       props.onCreated(res.data.student);
     } else {
-      if (currentImage.value !== studentObj.photo) {
-        res = await apiUpdateStudent(studentObj);
-      } else {
-        const { photo, ...obj } = studentObj;
-        res = await apiUpdateStudent(obj);
-      }
+      const photoChanged = currentImage.value !== studentObj.photo;
+      res = await apiUpdateStudent(await buildFormData(studentObj, photoChanged));
       props.onUpdated(res.data.student);
     }
     hideStudentModal();
