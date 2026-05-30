@@ -1,8 +1,17 @@
+import Swal from 'sweetalert2';
+window.Swal = Swal;
+
 import jquery from 'jquery';
 window.$ = window.jQuery = jquery;
 
 import axios from 'axios';
 window.axios = axios;
+
+import { LoadingModal, MessageModal, CloseModal, ErrorModal } from './functions/swal';
+window.LoadingModal = LoadingModal;
+window.MessageModal = MessageModal;
+window.CloseModal = CloseModal;
+window.ErrorModal = ErrorModal;
 
 window.APP_URL = import.meta.env.VITE_APP_URL;
 window.APP_API_URL = import.meta.env.VITE_APP_API_URL;
@@ -22,6 +31,7 @@ import App from './App.vue'
 import router from './router'
 import { useUserStore } from '@/stores/user';
 import { apiVerify } from '@/functions/api/auth';
+import VueMultiselect from 'vue-multiselect';
 
 const app = createApp(App)
 
@@ -29,6 +39,7 @@ const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 app.use(pinia);
 app.use(router);
+app.component('VueMultiselect', VueMultiselect);
 app.mount('#app');
 
 

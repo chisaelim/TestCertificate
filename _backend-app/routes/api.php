@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update/profile-image', [AuthController::class, 'updateProfileImage']);
     Route::delete('/delete/profile-image', [AuthController::class, 'deleteProfileImage']);
 
-    Route::middleware('_ADMINSTRATOR_')->group(function () {
+    Route::middleware('_ADMINISTRATOR_')->group(function () {
         Route::prefix('/provinces')->group(function () {
             Route::get('/', [GeographyController::class, 'getProvinces']);
             Route::get('/read/{id_province}', [GeographyController::class, 'readProvince']);
@@ -37,25 +37,25 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::delete('/delete/{id_province}', [GeographyController::class, 'deleteProvince']);
         });
         Route::prefix('/communes')->group(function () {
-            Route::get('/by/district/{id_geography}', [GeographyController::class, 'getCommunesByDistrictID']);
-            Route::get('/read/{id_commune}', [GeographyController::class, 'readCommune']);
+            Route::get('/by/district/{id}', [GeographyController::class, 'getCommunesByDistrictID']);
+            Route::get('/read/{id}', [GeographyController::class, 'readCommune']);
             Route::post('/create', [GeographyController::class, 'createCommune']);
             Route::put('/update', [GeographyController::class, 'updateCommune']);
-            Route::delete('/delete/{id_commune}', [GeographyController::class, 'deleteCommune']);
+            Route::delete('/delete/{id}', [GeographyController::class, 'deleteCommune']);
         });
         Route::prefix('/districts')->group(function () {
-            Route::get('/by/province/{id_geography}', [GeographyController::class, 'getDistrictsByProvinceID']);
-            Route::get('/read/{id_district}', [GeographyController::class, 'readDistrict']);
+            Route::get('/by/province/{id}', [GeographyController::class, 'getDistrictsByProvinceID']);
+            Route::get('/read/{id}', [GeographyController::class, 'readDistrict']);
             Route::post('/create', [GeographyController::class, 'createDistrict']);
             Route::put('/update', [GeographyController::class, 'updateDistrict']);
-            Route::delete('/delete/{id_district}', [GeographyController::class, 'deleteDistrict']);
+            Route::delete('/delete/{id}', [GeographyController::class, 'deleteDistrict']);
         });
         Route::prefix('/villages')->group(function () {
-            Route::get('/by/commune/{id_geography}', [GeographyController::class, 'getVillagesByCommuneID']);
-            Route::get('/read/{id_village}', [GeographyController::class, 'readVillage']);
+            Route::get('/by/commune/{id}', [GeographyController::class, 'getVillagesByCommuneID']);
+            Route::get('/read/{id}', [GeographyController::class, 'readVillage']);
             Route::post('/create', [GeographyController::class, 'createVillage']);
             Route::put('/update', [GeographyController::class, 'updateVillage']);
-            Route::delete('/delete/{id_village}', [GeographyController::class, 'deleteVillage']);
+            Route::delete('/delete/{id}', [GeographyController::class, 'deleteVillage']);
         });
     });
 

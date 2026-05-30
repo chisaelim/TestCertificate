@@ -72,28 +72,28 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link :to="{ name: 'provinces' }" active-class="active" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Capitals / Provinces</p>
-                </router-link>
+                </a>
               </li>
               <li class="nav-item">
-                <router-link :to="{ name: 'districts' }" active-class="active" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Municipalities / Sections / Districts</p>
-                </router-link>
+                </a>
               </li>
               <li class="nav-item">
-                <router-link :to="{ name: 'communes' }" active-class="active" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Quaters / Communes</p>
-                </router-link>
+                </a>
               </li>
               <li class="nav-item">
-                <router-link :to="{ name: 'villages' }" active-class="active" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Villages</p>
-                </router-link>
+                </a>
               </li>
             </ul>
           </li>
@@ -119,8 +119,9 @@ function syncTreeviewActiveState() {
 }
 
 onMounted(() => {
-  nextTick(syncTreeviewActiveState);
+  $('[data-widget="treeview"]').Treeview("init");
+  // nextTick(syncTreeviewActiveState);
 });
 
-watch(() => route.fullPath, () => nextTick(syncTreeviewActiveState));
+// watch(() => route.fullPath, () => nextTick(syncTreeviewActiveState));
 </script>
