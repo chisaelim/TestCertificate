@@ -1,0 +1,1514 @@
+[
+    {
+        "id_country": 1,
+        "name_en": "Afghanistan",
+        "name_kh": "អាហ្វហ្គានីស្ថាន",
+        "code": "AF"
+    },
+    {
+        "id_country": 2,
+        "name_en": "Albania",
+        "name_kh": "អាល់បានី",
+        "code": "AL"
+    },
+    {
+        "id_country": 3,
+        "name_en": "Algeria",
+        "name_kh": "អាល់ហ្សេរី",
+        "code": "DZ"
+    },
+    {
+        "id_country": 4,
+        "name_en": "American Samoa",
+        "name_kh": "សាម័រអាមេរិក*",
+        "code": "AS"
+    },
+    {
+        "id_country": 5,
+        "name_en": "Andorra",
+        "name_kh": "អង់ដូរ៉ា*",
+        "code": "AD"
+    },
+    {
+        "id_country": 6,
+        "name_en": "Angola",
+        "name_kh": "អង់ហ្គោឡា",
+        "code": "AO"
+    },
+    {
+        "id_country": 7,
+        "name_en": "Anguilla",
+        "name_kh": "អង់ហ្គីឡា*",
+        "code": "AI"
+    },
+    {
+        "id_country": 8,
+        "name_en": "Antarctica",
+        "name_kh": "អង់តាក់ទិក",
+        "code": "AQ"
+    },
+    {
+        "id_country": 9,
+        "name_en": "Antigua and Barbuda",
+        "name_kh": "អង់ទីហ្គា និងបាប៊ូដា*",
+        "code": "AG"
+    },
+    {
+        "id_country": 10,
+        "name_en": "Argentina",
+        "name_kh": "អាហ្សង់ទីន",
+        "code": "AR"
+    },
+    {
+        "id_country": 11,
+        "name_en": "Armenia",
+        "name_kh": "អារមេនី",
+        "code": "AM"
+    },
+    {
+        "id_country": 12,
+        "name_en": "Aruba",
+        "name_kh": "អារូបា*",
+        "code": "AW"
+    },
+    {
+        "id_country": 13,
+        "name_en": "Asia/Pacific Region",
+        "name_kh": "តំបន់អាស៊ី-ប៉ាស៊ីហ្វិក",
+        "code": "AP"
+    },
+    {
+        "id_country": 14,
+        "name_en": "Australia",
+        "name_kh": "អូស្ត្រាលី",
+        "code": "AU"
+    },
+    {
+        "id_country": 15,
+        "name_en": "Austria",
+        "name_kh": "អូទ្រីស",
+        "code": "AT"
+    },
+    {
+        "id_country": 16,
+        "name_en": "Azerbaijan",
+        "name_kh": "អាស៊ែបៃហ្សង់",
+        "code": "AZ"
+    },
+    {
+        "id_country": 17,
+        "name_en": "Bahamas",
+        "name_kh": "បាហាម៉ា",
+        "code": "BS"
+    },
+    {
+        "id_country": 18,
+        "name_en": "Bahrain",
+        "name_kh": "បារ៉ែន",
+        "code": "BH"
+    },
+    {
+        "id_country": 19,
+        "name_en": "Bangladesh",
+        "name_kh": "បង់ក្លាដែស",
+        "code": "BD"
+    },
+    {
+        "id_country": 20,
+        "name_en": "Barbados",
+        "name_kh": "បាបាដុស*",
+        "code": "BB"
+    },
+    {
+        "id_country": 21,
+        "name_en": "Belarus",
+        "name_kh": "បេឡារុស",
+        "code": "BY"
+    },
+    {
+        "id_country": 22,
+        "name_en": "Belgium",
+        "name_kh": "បែលហ្ស៊ិក",
+        "code": "BE"
+    },
+    {
+        "id_country": 23,
+        "name_en": "Belize",
+        "name_kh": "បេលីស*",
+        "code": "BZ"
+    },
+    {
+        "id_country": 24,
+        "name_en": "Benin",
+        "name_kh": "បេណាំង",
+        "code": "BJ"
+    },
+    {
+        "id_country": 25,
+        "name_en": "Bermuda",
+        "name_kh": "ប៊ឺមូដា*",
+        "code": "BM"
+    },
+    {
+        "id_country": 26,
+        "name_en": "Bhutan",
+        "name_kh": "ប៊ូតាន",
+        "code": "BT"
+    },
+    {
+        "id_country": 27,
+        "name_en": "Bolivia",
+        "name_kh": "បូលីវី",
+        "code": "BO"
+    },
+    {
+        "id_country": 28,
+        "name_en": "Bonaire, Sint Eustatius and Saba",
+        "name_kh": "បូណែរ ស៊ីនអឺស៊្តាស៊ីស និងសាបា*",
+        "code": "BQ"
+    },
+    {
+        "id_country": 29,
+        "name_en": "Bosnia and Herzegovina",
+        "name_kh": "បូស្នី និងហឺហ្សេហ្គូវីណា",
+        "code": "BA"
+    },
+    {
+        "id_country": 30,
+        "name_en": "Botswana",
+        "name_kh": "បូតស្វាណា",
+        "code": "BW"
+    },
+    {
+        "id_country": 31,
+        "name_en": "Bouvet Island",
+        "name_kh": "កោះប៊ូវ៉េត*",
+        "code": "BV"
+    },
+    {
+        "id_country": 32,
+        "name_en": "Brazil",
+        "name_kh": "ប្រេស៊ីល",
+        "code": "BR"
+    },
+    {
+        "id_country": 33,
+        "name_en": "British Indian Ocean Territory",
+        "name_kh": "ដែនដីមហាសមុទ្រឥណ្ឌារបស់អង់គ្លេស*",
+        "code": "IO"
+    },
+    {
+        "id_country": 34,
+        "name_en": "Brunei Darussalam",
+        "name_kh": "ព្រុយណេ",
+        "code": "BN"
+    },
+    {
+        "id_country": 35,
+        "name_en": "Bulgaria",
+        "name_kh": "ប៊ុលហ្គារី",
+        "code": "BG"
+    },
+    {
+        "id_country": 36,
+        "name_en": "Burkina Faso",
+        "name_kh": "ប៊ូគីណាហ្វាសូ",
+        "code": "BF"
+    },
+    {
+        "id_country": 37,
+        "name_en": "Burundi",
+        "name_kh": "ប៊ូរុនឌី",
+        "code": "BI"
+    },
+    {
+        "id_country": 38,
+        "name_en": "Cambodia",
+        "name_kh": "កម្ពុជា",
+        "code": "KH"
+    },
+    {
+        "id_country": 39,
+        "name_en": "Cameroon",
+        "name_kh": "កាមេរូន",
+        "code": "CM"
+    },
+    {
+        "id_country": 40,
+        "name_en": "Canada",
+        "name_kh": "កាណាដា",
+        "code": "CA"
+    },
+    {
+        "id_country": 41,
+        "name_en": "Cape Verde",
+        "name_kh": "កាបវែរ*",
+        "code": "CV"
+    },
+    {
+        "id_country": 42,
+        "name_en": "Cayman Islands",
+        "name_kh": "កោះកៃម៉ាន*",
+        "code": "KY"
+    },
+    {
+        "id_country": 43,
+        "name_en": "Central African Republic",
+        "name_kh": "សាធារណរដ្ឋអាហ្វ្រិកកណ្តាល",
+        "code": "CF"
+    },
+    {
+        "id_country": 44,
+        "name_en": "Chad",
+        "name_kh": "ឆាដ",
+        "code": "TD"
+    },
+    {
+        "id_country": 45,
+        "name_en": "Chile",
+        "name_kh": "ស៊ីលី",
+        "code": "CL"
+    },
+    {
+        "id_country": 46,
+        "name_en": "China",
+        "name_kh": "ចិន",
+        "code": "CN"
+    },
+    {
+        "id_country": 47,
+        "name_en": "Christmas Island",
+        "name_kh": "កោះគ្រីស្មាស*",
+        "code": "CX"
+    },
+    {
+        "id_country": 48,
+        "name_en": "Cocos (Keeling) Islands",
+        "name_kh": "កោះកូកូស*",
+        "code": "CC"
+    },
+    {
+        "id_country": 49,
+        "name_en": "Colombia",
+        "name_kh": "កូឡុំប៊ី",
+        "code": "CO"
+    },
+    {
+        "id_country": 50,
+        "name_en": "Comoros",
+        "name_kh": "កូម័រ*",
+        "code": "KM"
+    },
+    {
+        "id_country": 51,
+        "name_en": "Congo",
+        "name_kh": "កុងហ្គោ",
+        "code": "CG"
+    },
+    {
+        "id_country": 52,
+        "name_en": "Congo, The Democratic Republic of the",
+        "name_kh": "សាធារណរដ្ឋប្រជាធិបតេយ្យកុងហ្គោ",
+        "code": "CD"
+    },
+    {
+        "id_country": 53,
+        "name_en": "Cook Islands",
+        "name_kh": "កោះខូក*",
+        "code": "CK"
+    },
+    {
+        "id_country": 54,
+        "name_en": "Costa Rica",
+        "name_kh": "កូស្តារីកា",
+        "code": "CR"
+    },
+    {
+        "id_country": 55,
+        "name_en": "Croatia",
+        "name_kh": "ក្រូអាស៊ី",
+        "code": "HR"
+    },
+    {
+        "id_country": 56,
+        "name_en": "Cuba",
+        "name_kh": "គុយបា",
+        "code": "CU"
+    },
+    {
+        "id_country": 57,
+        "name_en": "Curaçao",
+        "name_kh": "ឃ្យូរ៉ាកាវ*",
+        "code": "CW"
+    },
+    {
+        "id_country": 58,
+        "name_en": "Cyprus",
+        "name_kh": "ស៊ីប",
+        "code": "CY"
+    },
+    {
+        "id_country": 59,
+        "name_en": "Czech Republic",
+        "name_kh": "សាធារណរដ្ឋឆែក",
+        "code": "CZ"
+    },
+    {
+        "id_country": 60,
+        "name_en": "Côte d'Ivoire",
+        "name_kh": "កូតឌីវ័រ",
+        "code": "CI"
+    },
+    {
+        "id_country": 61,
+        "name_en": "Denmark",
+        "name_kh": "ដាណឺម៉ាក",
+        "code": "DK"
+    },
+    {
+        "id_country": 62,
+        "name_en": "Djibouti",
+        "name_kh": "ជីប៊ូទី",
+        "code": "DJ"
+    },
+    {
+        "id_country": 63,
+        "name_en": "Dominica",
+        "name_kh": "ដូមីនីក*",
+        "code": "DM"
+    },
+    {
+        "id_country": 64,
+        "name_en": "Dominican Republic",
+        "name_kh": "សាធារណរដ្ឋដូមីនីកែន",
+        "code": "DO"
+    },
+    {
+        "id_country": 65,
+        "name_en": "Ecuador",
+        "name_kh": "អេក្វាឌ័រ",
+        "code": "EC"
+    },
+    {
+        "id_country": 66,
+        "name_en": "Egypt",
+        "name_kh": "អេហ្ស៊ីប",
+        "code": "EG"
+    },
+    {
+        "id_country": 67,
+        "name_en": "El Salvador",
+        "name_kh": "អែលសាល់វ៉ាឌ័រ",
+        "code": "SV"
+    },
+    {
+        "id_country": 68,
+        "name_en": "Equatorial Guinea",
+        "name_kh": "ហ្គីណេអេក្វាទ័រ",
+        "code": "GQ"
+    },
+    {
+        "id_country": 69,
+        "name_en": "Eritrea",
+        "name_kh": "អេរីទ្រា",
+        "code": "ER"
+    },
+    {
+        "id_country": 70,
+        "name_en": "Estonia",
+        "name_kh": "អេស្តូនី",
+        "code": "EE"
+    },
+    {
+        "id_country": 71,
+        "name_en": "Ethiopia",
+        "name_kh": "អេត្យូពី",
+        "code": "ET"
+    },
+    {
+        "id_country": 72,
+        "name_en": "Falkland Islands (Malvinas)",
+        "name_kh": "កោះហ្វក់ឡែន*",
+        "code": "FK"
+    },
+    {
+        "id_country": 73,
+        "name_en": "Faroe Islands",
+        "name_kh": "កោះហ្វារ៉ូ*",
+        "code": "FO"
+    },
+    {
+        "id_country": 74,
+        "name_en": "Fiji",
+        "name_kh": "ហ្វីជី",
+        "code": "FJ"
+    },
+    {
+        "id_country": 75,
+        "name_en": "Finland",
+        "name_kh": "ហ្វាំងឡង់",
+        "code": "FI"
+    },
+    {
+        "id_country": 76,
+        "name_en": "France",
+        "name_kh": "បារាំង",
+        "code": "FR"
+    },
+    {
+        "id_country": 77,
+        "name_en": "French Guiana",
+        "name_kh": "ហ្គីយ៉ាណាបារាំង*",
+        "code": "GF"
+    },
+    {
+        "id_country": 78,
+        "name_en": "French Polynesia",
+        "name_kh": "ប៉ូលីណេស៊ីបារាំង*",
+        "code": "PF"
+    },
+    {
+        "id_country": 79,
+        "name_en": "French Southern Territories",
+        "name_kh": "ដែនដីភាគខាងត្បូងបារាំង*",
+        "code": "TF"
+    },
+    {
+        "id_country": 80,
+        "name_en": "Gabon",
+        "name_kh": "ហ្គាបុង",
+        "code": "GA"
+    },
+    {
+        "id_country": 81,
+        "name_en": "Gambia",
+        "name_kh": "ហ្គំប៊ី",
+        "code": "GM"
+    },
+    {
+        "id_country": 82,
+        "name_en": "Georgia",
+        "name_kh": "ហ្សកហ្ស៊ី",
+        "code": "GE"
+    },
+    {
+        "id_country": 83,
+        "name_en": "Germany",
+        "name_kh": "អាល្លឺម៉ង់",
+        "code": "DE"
+    },
+    {
+        "id_country": 84,
+        "name_en": "Ghana",
+        "name_kh": "ហ្គាណា",
+        "code": "GH"
+    },
+    {
+        "id_country": 85,
+        "name_en": "Gibraltar",
+        "name_kh": "ហ្ស៊ីប្រាល់តា*",
+        "code": "GI"
+    },
+    {
+        "id_country": 86,
+        "name_en": "Greece",
+        "name_kh": "ក្រិក",
+        "code": "GR"
+    },
+    {
+        "id_country": 87,
+        "name_en": "Greenland",
+        "name_kh": "ហ្គ្រីនលែន*",
+        "code": "GL"
+    },
+    {
+        "id_country": 88,
+        "name_en": "Grenada",
+        "name_kh": "ហ្គ្រើណាដា*",
+        "code": "GD"
+    },
+    {
+        "id_country": 89,
+        "name_en": "Guadeloupe",
+        "name_kh": "ហ្គាដឺឡុប*",
+        "code": "GP"
+    },
+    {
+        "id_country": 90,
+        "name_en": "Guam",
+        "name_kh": "ហ្គាំម*",
+        "code": "GU"
+    },
+    {
+        "id_country": 91,
+        "name_en": "Guatemala",
+        "name_kh": "ហ្គាតេម៉ាឡា",
+        "code": "GT"
+    },
+    {
+        "id_country": 92,
+        "name_en": "Guernsey",
+        "name_kh": "ហ្គឺនស៊ី*",
+        "code": "GG"
+    },
+    {
+        "id_country": 93,
+        "name_en": "Guinea",
+        "name_kh": "ហ្គីណេ",
+        "code": "GN"
+    },
+    {
+        "id_country": 94,
+        "name_en": "Guinea-Bissau",
+        "name_kh": "ហ្គីណេប៊ីសៅ",
+        "code": "GW"
+    },
+    {
+        "id_country": 95,
+        "name_en": "Guyana",
+        "name_kh": "ហ្គីយ៉ាណា*",
+        "code": "GY"
+    },
+    {
+        "id_country": 96,
+        "name_en": "Haiti",
+        "name_kh": "ហៃទី",
+        "code": "HT"
+    },
+    {
+        "id_country": 97,
+        "name_en": "Heard Island and Mcdonald Islands",
+        "name_kh": "កោះហឺដ និងម៉ាក់ដូណាល់*",
+        "code": "HM"
+    },
+    {
+        "id_country": 98,
+        "name_en": "Holy See (Vatican City State)",
+        "name_kh": "បុរីវ៉ាទីកង់",
+        "code": "VA"
+    },
+    {
+        "id_country": 99,
+        "name_en": "Honduras",
+        "name_kh": "ហុងឌូរ៉ាស",
+        "code": "HN"
+    },
+    {
+        "id_country": 100,
+        "name_en": "Hong Kong",
+        "name_kh": "ហុងកុង",
+        "code": "HK"
+    },
+    {
+        "id_country": 101,
+        "name_en": "Hungary",
+        "name_kh": "ហុងគ្រី",
+        "code": "HU"
+    },
+    {
+        "id_country": 102,
+        "name_en": "Iceland",
+        "name_kh": "អ៊ីស្លង់",
+        "code": "IS"
+    },
+    {
+        "id_country": 103,
+        "name_en": "India",
+        "name_kh": "ឥណ្ឌា",
+        "code": "IN"
+    },
+    {
+        "id_country": 104,
+        "name_en": "Indonesia",
+        "name_kh": "ឥណ្ឌូណេស៊ី",
+        "code": "ID"
+    },
+    {
+        "id_country": 105,
+        "name_en": "Iran, Islamic Republic Of",
+        "name_kh": "អ៊ីរ៉ង់",
+        "code": "IR"
+    },
+    {
+        "id_country": 106,
+        "name_en": "Iraq",
+        "name_kh": "អ៊ីរ៉ាក់",
+        "code": "IQ"
+    },
+    {
+        "id_country": 107,
+        "name_en": "Ireland",
+        "name_kh": "អៀរឡង់",
+        "code": "IE"
+    },
+    {
+        "id_country": 108,
+        "name_en": "Isle of Man",
+        "name_kh": "កោះម៉ាន*",
+        "code": "IM"
+    },
+    {
+        "id_country": 109,
+        "name_en": "Israel",
+        "name_kh": "អ៊ីស្រាអែល",
+        "code": "IL"
+    },
+    {
+        "id_country": 110,
+        "name_en": "Italy",
+        "name_kh": "អ៊ីតាលី",
+        "code": "IT"
+    },
+    {
+        "id_country": 111,
+        "name_en": "Jamaica",
+        "name_kh": "ហ្សាម៉ាអ៊ីក",
+        "code": "JM"
+    },
+    {
+        "id_country": 112,
+        "name_en": "Japan",
+        "name_kh": "ជប៉ុន",
+        "code": "JP"
+    },
+    {
+        "id_country": 113,
+        "name_en": "Jersey",
+        "name_kh": "ជឺស៊ី*",
+        "code": "JE"
+    },
+    {
+        "id_country": 114,
+        "name_en": "Jordan",
+        "name_kh": "ហ៊្សកដានី",
+        "code": "JO"
+    },
+    {
+        "id_country": 115,
+        "name_en": "Kazakhstan",
+        "name_kh": "កាហ្សាក់ស្ថាន",
+        "code": "KZ"
+    },
+    {
+        "id_country": 116,
+        "name_en": "Kenya",
+        "name_kh": "កេនយ៉ា",
+        "code": "KE"
+    },
+    {
+        "id_country": 117,
+        "name_en": "Kiribati",
+        "name_kh": "គីរីបាទី*",
+        "code": "KI"
+    },
+    {
+        "id_country": 118,
+        "name_en": "Korea, Republic of",
+        "name_kh": "កូរ៉េខាងត្បូង",
+        "code": "KR"
+    },
+    {
+        "id_country": 119,
+        "name_en": "Kuwait",
+        "name_kh": "កូវ៉ែត",
+        "code": "KW"
+    },
+    {
+        "id_country": 120,
+        "name_en": "Kyrgyzstan",
+        "name_kh": "កៀហ្ស៊ីស៊ីស្ថាន",
+        "code": "KG"
+    },
+    {
+        "id_country": 121,
+        "name_en": "Laos",
+        "name_kh": "ឡាវ",
+        "code": "LA"
+    },
+    {
+        "id_country": 122,
+        "name_en": "Latvia",
+        "name_kh": "ឡាតវី",
+        "code": "LV"
+    },
+    {
+        "id_country": 123,
+        "name_en": "Lebanon",
+        "name_kh": "លីបង់",
+        "code": "LB"
+    },
+    {
+        "id_country": 124,
+        "name_en": "Lesotho",
+        "name_kh": "ឡេសូតូ*",
+        "code": "LS"
+    },
+    {
+        "id_country": 125,
+        "name_en": "Liberia",
+        "name_kh": "លីបេរីយ៉ា",
+        "code": "LR"
+    },
+    {
+        "id_country": 126,
+        "name_en": "Libyan Arab Jamahiriya",
+        "name_kh": "លីប៊ី",
+        "code": "LY"
+    },
+    {
+        "id_country": 127,
+        "name_en": "Liechtenstein",
+        "name_kh": "លិចតិនស្តាញ*",
+        "code": "LI"
+    },
+    {
+        "id_country": 128,
+        "name_en": "Lithuania",
+        "name_kh": "លីទុយអានី",
+        "code": "LT"
+    },
+    {
+        "id_country": 129,
+        "name_en": "Luxembourg",
+        "name_kh": "លុចសំបួរ",
+        "code": "LU"
+    },
+    {
+        "id_country": 130,
+        "name_en": "Macao",
+        "name_kh": "ម៉ាកាវ",
+        "code": "MO"
+    },
+    {
+        "id_country": 131,
+        "name_en": "Madagascar",
+        "name_kh": "ម៉ាដាហ្គាស្កា",
+        "code": "MG"
+    },
+    {
+        "id_country": 132,
+        "name_en": "Malawi",
+        "name_kh": "ម៉ាឡាវី",
+        "code": "MW"
+    },
+    {
+        "id_country": 133,
+        "name_en": "Malaysia",
+        "name_kh": "ម៉ាឡេស៊ី",
+        "code": "MY"
+    },
+    {
+        "id_country": 134,
+        "name_en": "Maldives",
+        "name_kh": "ម៉ាល់ឌីវ",
+        "code": "MV"
+    },
+    {
+        "id_country": 135,
+        "name_en": "Mali",
+        "name_kh": "ម៉ាលី",
+        "code": "ML"
+    },
+    {
+        "id_country": 136,
+        "name_en": "Malta",
+        "name_kh": "ម៉ាល់តា",
+        "code": "MT"
+    },
+    {
+        "id_country": 137,
+        "name_en": "Marshall Islands",
+        "name_kh": "កោះម៉ាស់សល*",
+        "code": "MH"
+    },
+    {
+        "id_country": 138,
+        "name_en": "Martinique",
+        "name_kh": "ម៉ាទីនីក*",
+        "code": "MQ"
+    },
+    {
+        "id_country": 139,
+        "name_en": "Mauritania",
+        "name_kh": "ម៉ូរីតានី",
+        "code": "MR"
+    },
+    {
+        "id_country": 140,
+        "name_en": "Mauritius",
+        "name_kh": "ម៉ូរីស",
+        "code": "MU"
+    },
+    {
+        "id_country": 141,
+        "name_en": "Mayotte",
+        "name_kh": "ម៉ាយ៉ុត*",
+        "code": "YT"
+    },
+    {
+        "id_country": 142,
+        "name_en": "Mexico",
+        "name_kh": "ម៉ិកស៊ិក",
+        "code": "MX"
+    },
+    {
+        "id_country": 143,
+        "name_en": "Micronesia, Federated States of",
+        "name_kh": "មីក្រូណេស៊ី*",
+        "code": "FM"
+    },
+    {
+        "id_country": 144,
+        "name_en": "Moldova, Republic of",
+        "name_kh": "ម៉ុលដាវី",
+        "code": "MD"
+    },
+    {
+        "id_country": 145,
+        "name_en": "Monaco",
+        "name_kh": "ម៉ូណាកូ",
+        "code": "MC"
+    },
+    {
+        "id_country": 146,
+        "name_en": "Mongolia",
+        "name_kh": "ម៉ុងហ្គោលី",
+        "code": "MN"
+    },
+    {
+        "id_country": 147,
+        "name_en": "Montenegro",
+        "name_kh": "ម៉ុងតេណេហ្គ្រោ",
+        "code": "ME"
+    },
+    {
+        "id_country": 148,
+        "name_en": "Montserrat",
+        "name_kh": "ម៉ុងសេរ៉ាត*",
+        "code": "MS"
+    },
+    {
+        "id_country": 149,
+        "name_en": "Morocco",
+        "name_kh": "ម៉ារ៉ុក",
+        "code": "MA"
+    },
+    {
+        "id_country": 150,
+        "name_en": "Mozambique",
+        "name_kh": "ម៉ូសំប៊ិក",
+        "code": "MZ"
+    },
+    {
+        "id_country": 151,
+        "name_en": "Myanmar",
+        "name_kh": "មីយ៉ាន់ម៉ា",
+        "code": "MM"
+    },
+    {
+        "id_country": 152,
+        "name_en": "Namibia",
+        "name_kh": "ណាមីប៊ី",
+        "code": "NA"
+    },
+    {
+        "id_country": 153,
+        "name_en": "Nauru",
+        "name_kh": "ណូរូ*",
+        "code": "NR"
+    },
+    {
+        "id_country": 154,
+        "name_en": "Nepal",
+        "name_kh": "នេប៉ាល់",
+        "code": "NP"
+    },
+    {
+        "id_country": 155,
+        "name_en": "Netherlands",
+        "name_kh": "ហូឡង់",
+        "code": "NL"
+    },
+    {
+        "id_country": 156,
+        "name_en": "Netherlands Antilles",
+        "name_kh": "កោះអង់ទីលហូឡង់*",
+        "code": "AN"
+    },
+    {
+        "id_country": 157,
+        "name_en": "New Caledonia",
+        "name_kh": "កាឡេដូនីថ្មី*",
+        "code": "NC"
+    },
+    {
+        "id_country": 158,
+        "name_en": "New Zealand",
+        "name_kh": "នូវែលសេឡង់",
+        "code": "NZ"
+    },
+    {
+        "id_country": 159,
+        "name_en": "Nicaragua",
+        "name_kh": "នីការ៉ាហ្គា",
+        "code": "NI"
+    },
+    {
+        "id_country": 160,
+        "name_en": "Niger",
+        "name_kh": "នីហ្សេ",
+        "code": "NE"
+    },
+    {
+        "id_country": 161,
+        "name_en": "Nigeria",
+        "name_kh": "នីហ្សេរីយ៉ា",
+        "code": "NG"
+    },
+    {
+        "id_country": 162,
+        "name_en": "Niue",
+        "name_kh": "នីវ៉េ*",
+        "code": "NU"
+    },
+    {
+        "id_country": 163,
+        "name_en": "Norfolk Island",
+        "name_kh": "កោះណ័រហ្វក់*",
+        "code": "NF"
+    },
+    {
+        "id_country": 164,
+        "name_en": "North Korea",
+        "name_kh": "កូរ៉េខាងជើង",
+        "code": "KP"
+    },
+    {
+        "id_country": 165,
+        "name_en": "North Macedonia",
+        "name_kh": "ម៉ាសេដូនីខាងជើង",
+        "code": "MK"
+    },
+    {
+        "id_country": 166,
+        "name_en": "Northern Mariana Islands",
+        "name_kh": "កោះម៉ារីអាណាខាងជើង*",
+        "code": "MP"
+    },
+    {
+        "id_country": 167,
+        "name_en": "Norway",
+        "name_kh": "ន័រវេស",
+        "code": "NO"
+    },
+    {
+        "id_country": 168,
+        "name_en": "Oman",
+        "name_kh": "អូម៉ង់",
+        "code": "OM"
+    },
+    {
+        "id_country": 169,
+        "name_en": "Pakistan",
+        "name_kh": "ប៉ាគីស្ថាន",
+        "code": "PK"
+    },
+    {
+        "id_country": 170,
+        "name_en": "Palau",
+        "name_kh": "ប៉ាឡៅ*",
+        "code": "PW"
+    },
+    {
+        "id_country": 171,
+        "name_en": "Palestinian Territory, Occupied",
+        "name_kh": "ប៉ាឡេស្ទីន",
+        "code": "PS"
+    },
+    {
+        "id_country": 172,
+        "name_en": "Panama",
+        "name_kh": "ប៉ាណាម៉ា",
+        "code": "PA"
+    },
+    {
+        "id_country": 173,
+        "name_en": "Papua New Guinea",
+        "name_kh": "ប៉ាពូអាហ្គីណេថ្មី",
+        "code": "PG"
+    },
+    {
+        "id_country": 174,
+        "name_en": "Paraguay",
+        "name_kh": "ប៉ារ៉ាហ្គាយ",
+        "code": "PY"
+    },
+    {
+        "id_country": 175,
+        "name_en": "Peru",
+        "name_kh": "ប៉េរូ",
+        "code": "PE"
+    },
+    {
+        "id_country": 176,
+        "name_en": "Philippines",
+        "name_kh": "ហ្វីលីពីន",
+        "code": "PH"
+    },
+    {
+        "id_country": 177,
+        "name_en": "Pitcairn Islands",
+        "name_kh": "កោះភីតខេន*",
+        "code": "PN"
+    },
+    {
+        "id_country": 178,
+        "name_en": "Poland",
+        "name_kh": "ប៉ូឡូញ",
+        "code": "PL"
+    },
+    {
+        "id_country": 179,
+        "name_en": "Portugal",
+        "name_kh": "ព័រទុយហ្គាល់",
+        "code": "PT"
+    },
+    {
+        "id_country": 180,
+        "name_en": "Puerto Rico",
+        "name_kh": "ព័រតូរីកូ*",
+        "code": "PR"
+    },
+    {
+        "id_country": 181,
+        "name_en": "Qatar",
+        "name_kh": "កាតា",
+        "code": "QA"
+    },
+    {
+        "id_country": 182,
+        "name_en": "Reunion",
+        "name_kh": "រេអ៊ុយញ៉ុង*",
+        "code": "RE"
+    },
+    {
+        "id_country": 183,
+        "name_en": "Romania",
+        "name_kh": "រ៉ូម៉ានី",
+        "code": "RO"
+    },
+    {
+        "id_country": 184,
+        "name_en": "Russian Federation",
+        "name_kh": "រុស្ស៊ី",
+        "code": "RU"
+    },
+    {
+        "id_country": 185,
+        "name_en": "Rwanda",
+        "name_kh": "រវ៉ាន់ដា",
+        "code": "RW"
+    },
+    {
+        "id_country": 186,
+        "name_en": "Saint Barthélemy",
+        "name_kh": "សាំងបាតេឡេមី*",
+        "code": "BL"
+    },
+    {
+        "id_country": 187,
+        "name_en": "Saint Helena",
+        "name_kh": "សាំងហេឡេណា*",
+        "code": "SH"
+    },
+    {
+        "id_country": 188,
+        "name_en": "Saint Kitts and Nevis",
+        "name_kh": "សាំងគីត និងណេវីស*",
+        "code": "KN"
+    },
+    {
+        "id_country": 189,
+        "name_en": "Saint Lucia",
+        "name_kh": "សាំងលូស៊ី*",
+        "code": "LC"
+    },
+    {
+        "id_country": 190,
+        "name_en": "Saint Martin",
+        "name_kh": "សាំងម៉ាទីន*",
+        "code": "MF"
+    },
+    {
+        "id_country": 191,
+        "name_en": "Saint Pierre and Miquelon",
+        "name_kh": "សាំងព្យែរ និងមីកឺឡុង*",
+        "code": "PM"
+    },
+    {
+        "id_country": 192,
+        "name_en": "Saint Vincent and the Grenadines",
+        "name_kh": "សាំងវ៉ាំងសង់ និងហ្គ្រេណាឌីន*",
+        "code": "VC"
+    },
+    {
+        "id_country": 193,
+        "name_en": "Samoa",
+        "name_kh": "សាម័រ",
+        "code": "WS"
+    },
+    {
+        "id_country": 194,
+        "name_en": "San Marino",
+        "name_kh": "សាន់ម៉ារីណូ*",
+        "code": "SM"
+    },
+    {
+        "id_country": 195,
+        "name_en": "Sao Tome and Principe",
+        "name_kh": "សៅតូម៉េ និងព្រីនស៊ីប*",
+        "code": "ST"
+    },
+    {
+        "id_country": 196,
+        "name_en": "Saudi Arabia",
+        "name_kh": "អារ៉ាប៊ីសាអូឌីត",
+        "code": "SA"
+    },
+    {
+        "id_country": 197,
+        "name_en": "Senegal",
+        "name_kh": "សេណេហ្គាល់",
+        "code": "SN"
+    },
+    {
+        "id_country": 198,
+        "name_en": "Serbia",
+        "name_kh": "សើប៊ី",
+        "code": "RS"
+    },
+    {
+        "id_country": 199,
+        "name_en": "Serbia and Montenegro",
+        "name_kh": "សើប៊ី និងម៉ុងតេណេហ្គ្រោ",
+        "code": "CS"
+    },
+    {
+        "id_country": 200,
+        "name_en": "Seychelles",
+        "name_kh": "សីសែល*",
+        "code": "SC"
+    },
+    {
+        "id_country": 201,
+        "name_en": "Sierra Leone",
+        "name_kh": "សៀរ៉ាឡេអូន",
+        "code": "SL"
+    },
+    {
+        "id_country": 202,
+        "name_en": "Singapore",
+        "name_kh": "សិង្ហបុរី",
+        "code": "SG"
+    },
+    {
+        "id_country": 203,
+        "name_en": "Sint Maarten",
+        "name_kh": "ស៊ីនម៉ាធិន*",
+        "code": "SX"
+    },
+    {
+        "id_country": 204,
+        "name_en": "Slovakia",
+        "name_kh": "ស្លូវ៉ាគី",
+        "code": "SK"
+    },
+    {
+        "id_country": 205,
+        "name_en": "Slovenia",
+        "name_kh": "ស្លូវេនី",
+        "code": "SI"
+    },
+    {
+        "id_country": 206,
+        "name_en": "Solomon Islands",
+        "name_kh": "កោះសូឡូម៉ុង*",
+        "code": "SB"
+    },
+    {
+        "id_country": 207,
+        "name_en": "Somalia",
+        "name_kh": "សូម៉ាលី",
+        "code": "SO"
+    },
+    {
+        "id_country": 208,
+        "name_en": "South Africa",
+        "name_kh": "អាហ្វ្រិកខាងត្បូង",
+        "code": "ZA"
+    },
+    {
+        "id_country": 209,
+        "name_en": "South Georgia and the South Sandwich Islands",
+        "name_kh": "កោះហ្សកហ្ស៊ីខាងត្បូង និងសាន់វិច*",
+        "code": "GS"
+    },
+    {
+        "id_country": 210,
+        "name_en": "South Sudan",
+        "name_kh": "ស៊ូដង់ខាងត្បូង",
+        "code": "SS"
+    },
+    {
+        "id_country": 211,
+        "name_en": "Spain",
+        "name_kh": "អេស្ប៉ាញ",
+        "code": "ES"
+    },
+    {
+        "id_country": 212,
+        "name_en": "Sri Lanka",
+        "name_kh": "ស្រីលង្កា",
+        "code": "LK"
+    },
+    {
+        "id_country": 213,
+        "name_en": "Sudan",
+        "name_kh": "ស៊ូដង់",
+        "code": "SD"
+    },
+    {
+        "id_country": 214,
+        "name_en": "Suriname",
+        "name_kh": "សូរីណាម",
+        "code": "SR"
+    },
+    {
+        "id_country": 215,
+        "name_en": "Svalbard and Jan Mayen",
+        "name_kh": "ស្វាលបា និងហ្សាន់ម៉ាយិន*",
+        "code": "SJ"
+    },
+    {
+        "id_country": 216,
+        "name_en": "Swaziland",
+        "name_kh": "អេស្វាទីនី",
+        "code": "SZ"
+    },
+    {
+        "id_country": 217,
+        "name_en": "Sweden",
+        "name_kh": "ស៊ុយអែត",
+        "code": "SE"
+    },
+    {
+        "id_country": 218,
+        "name_en": "Switzerland",
+        "name_kh": "ស្វីស",
+        "code": "CH"
+    },
+    {
+        "id_country": 219,
+        "name_en": "Syrian Arab Republic",
+        "name_kh": "ស៊ីរី",
+        "code": "SY"
+    },
+    {
+        "id_country": 220,
+        "name_en": "Taiwan",
+        "name_kh": "តៃវ៉ាន់",
+        "code": "TW"
+    },
+    {
+        "id_country": 221,
+        "name_en": "Tajikistan",
+        "name_kh": "តាជីគីស្ថាន",
+        "code": "TJ"
+    },
+    {
+        "id_country": 222,
+        "name_en": "Tanzania, United Republic of",
+        "name_kh": "តង់សានី",
+        "code": "TZ"
+    },
+    {
+        "id_country": 223,
+        "name_en": "Thailand",
+        "name_kh": "ថៃ",
+        "code": "TH"
+    },
+    {
+        "id_country": 224,
+        "name_en": "Timor-Leste",
+        "name_kh": "ទីម័រខាងកើត",
+        "code": "TL"
+    },
+    {
+        "id_country": 225,
+        "name_en": "Togo",
+        "name_kh": "តូហ្គោ",
+        "code": "TG"
+    },
+    {
+        "id_country": 226,
+        "name_en": "Tokelau",
+        "name_kh": "តូខេឡៅ*",
+        "code": "TK"
+    },
+    {
+        "id_country": 227,
+        "name_en": "Tonga",
+        "name_kh": "តុងហ្គា*",
+        "code": "TO"
+    },
+    {
+        "id_country": 228,
+        "name_en": "Trinidad and Tobago",
+        "name_kh": "ទ្រីនីដាត និងតូបាហ្គោ*",
+        "code": "TT"
+    },
+    {
+        "id_country": 229,
+        "name_en": "Tunisia",
+        "name_kh": "ទុយនីស៊ី",
+        "code": "TN"
+    },
+    {
+        "id_country": 230,
+        "name_en": "Turkey",
+        "name_kh": "ទួរគី",
+        "code": "TR"
+    },
+    {
+        "id_country": 231,
+        "name_en": "Turkmenistan",
+        "name_kh": "តួកម៉េនីស្ថាន",
+        "code": "TM"
+    },
+    {
+        "id_country": 232,
+        "name_en": "Turks and Caicos Islands",
+        "name_kh": "កោះទួកស៍ និងកៃកូស*",
+        "code": "TC"
+    },
+    {
+        "id_country": 233,
+        "name_en": "Tuvalu",
+        "name_kh": "ទូវ៉ាលូ*",
+        "code": "TV"
+    },
+    {
+        "id_country": 234,
+        "name_en": "Uganda",
+        "name_kh": "អ៊ូហ្គង់ដា",
+        "code": "UG"
+    },
+    {
+        "id_country": 235,
+        "name_en": "Ukraine",
+        "name_kh": "អ៊ុយក្រែន",
+        "code": "UA"
+    },
+    {
+        "id_country": 236,
+        "name_en": "United Arab Emirates",
+        "name_kh": "អេមីរ៉ាតអារ៉ាប់រួម",
+        "code": "AE"
+    },
+    {
+        "id_country": 237,
+        "name_en": "United Kingdom",
+        "name_kh": "ចក្រភពអង់គ្លេស",
+        "code": "GB"
+    },
+    {
+        "id_country": 238,
+        "name_en": "United States",
+        "name_kh": "សហរដ្ឋអាមេរិក",
+        "code": "US"
+    },
+    {
+        "id_country": 239,
+        "name_en": "United States Minor Outlying Islands",
+        "name_kh": "កោះនៅជាយសហរដ្ឋអាមេរិក*",
+        "code": "UM"
+    },
+    {
+        "id_country": 240,
+        "name_en": "Uruguay",
+        "name_kh": "អ៊ុយរុយហ្គាយ",
+        "code": "UY"
+    },
+    {
+        "id_country": 241,
+        "name_en": "Uzbekistan",
+        "name_kh": "អ៊ូសបេគីស្ថាន",
+        "code": "UZ"
+    },
+    {
+        "id_country": 242,
+        "name_en": "Vanuatu",
+        "name_kh": "វ៉ានូទូ*",
+        "code": "VU"
+    },
+    {
+        "id_country": 243,
+        "name_en": "Venezuela",
+        "name_kh": "វ៉េណេស៊ុយអេឡា",
+        "code": "VE"
+    },
+    {
+        "id_country": 244,
+        "name_en": "Vietnam",
+        "name_kh": "វៀតណាម",
+        "code": "VN"
+    },
+    {
+        "id_country": 245,
+        "name_en": "Virgin Islands, British",
+        "name_kh": "កោះវឺជីនអង់គ្លេស*",
+        "code": "VG"
+    },
+    {
+        "id_country": 246,
+        "name_en": "Virgin Islands, U.S.",
+        "name_kh": "កោះវឺជីនអាមេរិក*",
+        "code": "VI"
+    },
+    {
+        "id_country": 247,
+        "name_en": "Wallis and Futuna",
+        "name_kh": "វ៉ាលីស និងហ្វូទូណា*",
+        "code": "WF"
+    },
+    {
+        "id_country": 248,
+        "name_en": "Western Sahara",
+        "name_kh": "សាហារ៉ាខាងលិច*",
+        "code": "EH"
+    },
+    {
+        "id_country": 249,
+        "name_en": "Yemen",
+        "name_kh": "យេម៉ែន",
+        "code": "YE"
+    },
+    {
+        "id_country": 250,
+        "name_en": "Zambia",
+        "name_kh": "សំប៊ី",
+        "code": "ZM"
+    },
+    {
+        "id_country": 251,
+        "name_en": "Zimbabwe",
+        "name_kh": "ស៊ីមបាវ៉េ",
+        "code": "ZW"
+    },
+    {
+        "id_country": 252,
+        "name_en": "Åland Islands",
+        "name_kh": "កោះអាឡង់*",
+        "code": "AX"
+    }
+]

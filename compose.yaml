@@ -1,0 +1,59 @@
+services:
+    backend-service:
+        container_name: backend-container
+        build:
+            context: .
+            dockerfile: docker/_backend/Dockerfile
+        working_dir: /var/www/html
+        volumes:
+            - ./_backend-app:/var/www/html
+            - ./docker/_backend/entrypoint.development.sh:/usr/local/bin/entrypoint.development.sh
+            - ./docker/_backend/supervisord.development.conf:/etc/supervisor/conf.d/supervisord.development.conf
+        ports:
+            - "8000:8000"
+        depends_on:
+            - mysql-service
+        command: [ "bash", "/usr/local/bin/entrypoint.development.sh" ]
+
+    frontend-service:
+        container_name: frontend-container
+        build:
+            context: .
+            dockerfile: docker/_frontend/Dockerfile
+        working_dir: /app
+        volumes:
+            - ./_frontend-app:/app
+            - ./docker/_frontend/entrypoint.development.sh:/usr/local/bin/entrypoint.development.sh
+        ports:
+            - "5173:5173"
+        depends_on:
+            - backend-service
+        command: [ "sh", "/usr/local/bin/entrypoint.development.sh" ]
+
+    mysql-service:
+        image: mysql:8.0
+        container_name: mysql-container
+        environment:
+            MYSQL_DATABASE: certificate_system
+            MYSQL_USER: certificate_user
+            MYSQL_PASSWORD: certificate_password
+            MYSQL_ROOT_PASSWORD: root
+            TZ: UTC
+        volumes:
+            - mysql_data:/var/lib/mysql
+
+    phpmyadmin:
+        image: phpmyadmin:5.2.2
+        container_name: phpmyadmin-container
+        depends_on:
+            - mysql-service
+        environment:
+            UPLOAD_LIMIT: 50M
+            PMA_HOST: mysql-service
+            PMA_PORT: 3306
+            PMA_USER: root
+            PMA_PASSWORD: root
+        ports:
+            - "9000:80"
+volumes:
+    mysql_data:
