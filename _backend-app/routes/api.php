@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AssetController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\GeographyController;
 use App\Http\Controllers\API\GoogleOAuthController;
 use App\Http\Controllers\API\StudentController;
@@ -65,6 +66,10 @@ Route::middleware('auth:sanctum')->group(function () {
     //         Route::delete('/delete/{id}', [GeographyController::class, 'deleteVillage']);
     //     });
     // });
+
+    Route::prefix('/dashboard')->group(function () {
+        Route::get('/stats', [DashboardController::class, 'getStats']);
+    });
 
     Route::prefix('/students')->group(function () {
         Route::get('/', [StudentController::class, 'getStudents']);

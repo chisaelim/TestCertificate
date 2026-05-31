@@ -64,6 +64,7 @@ import { apiVerify } from '@/functions/api/auth';
 import VueMultiSelect from 'vue-multiselect';
 import { VueDatePicker } from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import VueApexCharts from 'vue3-apexcharts';
 
 const app = createApp(App)
 
@@ -73,6 +74,7 @@ app.use(pinia);
 app.use(router);
 app.component('VueMultiSelect', VueMultiSelect);
 app.component('VueDatePicker', VueDatePicker);
+app.use(VueApexCharts);
 app.mount('#app');
 
 
