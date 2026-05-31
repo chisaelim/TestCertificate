@@ -7,6 +7,7 @@ use App\Http\Controllers\API\GoogleOAuthController;
 use App\Http\Controllers\API\StudentController;
 use App\Http\Controllers\API\StudentTestController;
 use App\Http\Controllers\API\TestController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/signup', [AuthController::class, 'signup']);
@@ -102,5 +103,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/delete/{id}', [StudentTestController::class, 'deleteStudentTest']);
         Route::patch('/change/status', [StudentTestController::class, 'changeStudentTestStatus']);
         Route::get('/passed-for-certificates', [StudentTestController::class, 'getPassedStudentTestsForCertificates']);
+    });
+
+    Route::middleware('_ADMINISTRATOR_')->group(function () {
+        Route::prefix('/users')->group(function () {
+            Route::get('/', [UserController::class, 'getUsers']);
+            Route::get('/read/{id}', [UserController::class, 'readUser']);
+            Route::post('/create', [UserController::class, 'createUser']);
+            Route::put('/update', [UserController::class, 'updateUser']);
+            Route::delete('/delete/{id}', [UserController::class, 'deleteUser']);
+        });
     });
 });
