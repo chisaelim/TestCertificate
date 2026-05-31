@@ -32,7 +32,7 @@
           <li class="nav-item">
             <router-link :to="{ name: 'student-tests/classify' }" active-class="active" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
-              <p> Student Tests Classification</p>
+              <p>Tests Classification</p>
             </router-link>
           </li>
 
