@@ -157,8 +157,8 @@ const defaultTestErrObj = JSON.parse(JSON.stringify(testErrObj));
 
 onMounted(async () => {
   $('#test-modal').on('hide.bs.modal', function () {
-    Object.assign(testObj, JSON.parse(JSON.stringify(defaultTestObj)));
-    Object.assign(testErrObj, JSON.parse(JSON.stringify(defaultTestErrObj)));
+    Object.assign(testObj, defaultTestObj);
+    Object.assign(testErrObj, defaultTestErrObj);
   });
   try {
     LoadingModal();

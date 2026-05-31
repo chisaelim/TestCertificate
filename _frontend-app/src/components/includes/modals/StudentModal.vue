@@ -337,8 +337,8 @@ const defaultStudentErrObj = JSON.parse(JSON.stringify(studentErrObj));
 
 onMounted(async () => {
   $('#student-modal').on('hide.bs.modal', function () {
-    Object.assign(studentObj, JSON.parse(JSON.stringify(defaultStudentObj)));
-    Object.assign(studentErrObj, JSON.parse(JSON.stringify(defaultStudentErrObj)));
+    Object.assign(studentObj, defaultStudentObj);
+    Object.assign(studentErrObj, defaultStudentErrObj);
   });
   try {
     LoadingModal();

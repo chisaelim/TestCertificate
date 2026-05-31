@@ -9,6 +9,35 @@ window.uuid = uuidv7;
 import moment from 'moment';
 window.moment = moment;
 import pdfMake from 'pdfmake';
+import vfsFonts from '@/assets/vfs_fonts.js';
+pdfMake.addVirtualFileSystem(vfsFonts);
+pdfMake.addFonts({
+  Roboto: {
+    normal: 'Roboto-Regular.ttf',
+    bold: 'Roboto-Bold.ttf',
+    italics: 'Roboto-Italic.ttf',
+    bolditalics: 'Roboto-BoldItalic.ttf',
+  },
+  Arial: {
+    normal: 'ARIAL.TTF',
+    bold: 'ARIALBD.TTF',
+    italics: 'ARIALI.TTF',
+    bolditalics: 'ARIALBI.TTF',
+  },
+  Times: {
+    normal: 'times.ttf',
+    bold: 'timesbd.ttf',
+    italics: 'timesi.ttf',
+    bolditalics: 'timesbi.ttf',
+  },
+  KhmerOSMoul: {
+    normal: 'KHMER OS MOUL REGULAR.ttf',
+  },
+  KhmerOSBattambong: {
+    normal: 'KHMER OS BATTAMBANG REGULAR.ttf',
+    bold: 'KHMER OS BATTAMBANG - BOLD.ttf',
+  },
+});
 window.pdfMake = pdfMake;
 
 import { LoadingModal, MessageModal, CloseModal } from './functions/swal';
@@ -21,28 +50,6 @@ window.APP_API_URL = import.meta.env.VITE_APP_API_URL;
 window.APP_VERIFY_EMAIL_URL = import.meta.env.VITE_APP_VERIFY_EMAIL_URL;
 window.APP_RESET_PASSWORD_URL = import.meta.env.VITE_APP_RESET_PASSWORD_URL;
 window.APP_GOOGLE_OAUTH_CALLBACK_URL = import.meta.env.VITE_APP_GOOGLE_OAUTH_CALLBACK_URL;
-window.FONTS = {
-  Roboto: {
-    normal: await import('@/assets/fonts/roboto/Roboto-Regular.ttf'),
-    bold: await import('@/assets/fonts/roboto/Roboto-Bold.ttf'),
-    italics: await import('@/assets/fonts/roboto/Roboto-Italic.ttf'),
-    bolditalics: await import('@/assets/fonts/roboto/Roboto-BoldItalic.ttf')
-  },
-  Arial: {
-    normal: await import('@/assets/fonts/arial/ARIAL.TTF'),
-    bold: await import('@/assets/fonts/arial/ARIALBD.TTF'),
-    italics: await import('@/assets/fonts/arial/ARIALI.TTF'),
-    bolditalics: await import('@/assets/fonts/arial/ARIALBI.TTF')
-  },
-  KhmerOSMoul: {
-    normal: await import('@/assets/fonts/KHMER OS MOUL REGULAR.ttf'),
-  },
-  KhmerOSBattambong: {
-    normal: await import('@/assets/fonts/KHMER OS BATTAMBANG REGULAR.ttf'),
-    bold: await import('@/assets/fonts/KhmerOSBattambang-Bold.ttf'),
-  },
-}
-console.log(window.FONTS)
 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'admin-lte/dist/js/adminlte.min.js';

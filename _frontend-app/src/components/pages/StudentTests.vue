@@ -66,7 +66,7 @@
                 <div class="form-group">
                   <label>ថ្ងៃធ្វើតេស្ត</label>
                   <VueDatePicker v-model="issued_date" :formats="{ input: 'dd-MM-yyyy' }" model-type="dd-MM-yyyy"
-                    :time-config="{ enableTimePicker: false }"
+                    :time-config="{ enableTimePicker: false }" disabled
                     :class="{ 'is-invalid': !!studentTestErrObj.issued_date || dupli_student_test }" />
                   <div class="invalid-feedback">
                     {{ studentTestErrObj.issued_date || 'ព័ត៌មានធ្វើតេស្តរបស់សិស្សម្នាក់នេះមានរួចហើយ។' }}
@@ -128,7 +128,6 @@
   <div class="modal fade" id="PDF-MODAL" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
-
         <div class="modal-body">
           <iframe style="width: 100%; height: calc(100vh - 100px); min-height: 500px;"></iframe>
         </div>
@@ -293,11 +292,8 @@ const defaultStudentTestErrObj = JSON.parse(JSON.stringify(studentTestErrObj));
 onMounted(async () => {
   $("#test-detail-modal").on("hidden.bs.modal", function () {
     if (!$(this).is(":visible")) {
-      Object.assign(studentTestObj, JSON.parse(JSON.stringify(defaultStudentTestObj)));
-      Object.assign(
-        studentTestErrObj,
-        JSON.parse(JSON.stringify(defaultStudentTestErrObj))
-      );
+      Object.assign(studentTestObj, defaultStudentTestObj);
+      Object.assign(studentTestErrObj, defaultStudentTestErrObj);
     }
   });
   try {
@@ -439,7 +435,6 @@ const onStudentTestDeleted = (student_test) => {
 const passed_student_tests = computed(
   () => student_tests.value?.filter(({ status }) => status === "PASSED") ?? []
 );
-
 const passed_columns = [
   {
     accessorKey: "id",
@@ -526,14 +521,25 @@ const passed_columns = [
     header: "ឈ្មោះតេស្តជាភាសាអង់គ្លេស",
   },
 ];
-
 const passed_ids = ref([]);
 function openCertificateModal() {
   $("#certificate-modal").modal("show");
 }
 
+import el1 from '@/assets/images/elements/element1.png';
 async function generateStudentTestCertificatesPDF(passed_test_details) {
   try {
+    const toDataUrl = (url) => fetch(url)
+      .then(r => r.blob())
+      .then(blob => new Promise((res, rej) => {
+        const reader = new FileReader();
+        reader.onloadend = () => res(reader.result);
+        reader.onerror = rej;
+        reader.readAsDataURL(blob);
+      }));
+
+    const el1DataUrl = await toDataUrl(el1);
+
     let dots = [
       "................................",
       "............................................................................",
@@ -610,31 +616,34 @@ async function generateStudentTestCertificatesPDF(passed_test_details) {
           alignment: 'center'
         }
       ],
-      // margin: [0, -3.50, 0, 3.80],
       margin: [0, -5, 0, 3.75]
     });
-
-    const KH_MONTHS = ['មករា', 'កុម្ភៈ', 'មីនា', 'មេសា', 'ឧសភា', 'មិថុនា', 'កក្កដា', 'សីហា', 'កញ្ញា', 'តុលា', 'វិច្ឆិកា', 'ធ្នូ'];
-    const EN_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    // Input: "DD-MM-YYYY", Output: "DD Month YYYY"
-    const toDateEn = (str) => {
-      const [d, m, y] = str.split('-');
-      return `${d} ${EN_MONTHS[parseInt(m, 10) - 1]} ${y}`;
-    };
-    // Input: "DD-MM-YYYY", Output: "DD មករា YYYY" (space-separated, used with .split(' '))
-    const toDateKh = (str) => {
-      const [d, m, y] = str.split('-');
-      return `${d} ${KH_MONTHS[parseInt(m, 10) - 1]} ${y}`;
+    const khmerMonths = ['មករា', 'កុម្ភៈ', 'មីនា', 'មេសា', 'ឧសភា', 'មិថុនា', 'កក្កដា', 'សីហា', 'កញ្ញា', 'តុលា', 'វិច្ឆិកា', 'ធ្នូ'];
+    const enMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const formatDate = (dateStr) => {
+      const [day, month, year] = dateStr.split('-');
+      const idx = parseInt(month) - 1;
+      return { en: `${day} ${enMonths[idx]} ${year}`, kh: `${day} ${khmerMonths[idx]} ${year}` };
     };
     let page = 0;
     const data = [];
-    for (const { issued_date, expired_date, student, test } of passed_test_details) {
-      const issued_date_en = toDateEn(issued_date);
-      const issued_date_kh = toDateKh(issued_date);
-      const expired_date_en = toDateEn(expired_date);
-      const expired_date_kh = toDateKh(expired_date);
-      const dob_en = toDateEn(student.dob);
-      const dob_kh = toDateKh(student.dob);
+    for (const { id, issued_date, expired_date, student: s, test } of passed_test_details) {
+      const issuedDate = formatDate(issued_date);
+      const expiredDate = formatDate(expired_date);
+      const dobDate = formatDate(s.dob);
+      const issued_date_en = issuedDate.en;
+      const issued_date_kh = issuedDate.kh;
+      const expired_date_en = expiredDate.en;
+      const expired_date_kh = expiredDate.kh;
+      const student = {
+        name_en: s.name_en,
+        name_kh: s.name_kh,
+        gd_en: s.gender.gd_en,
+        gd_kh: s.gender.gd_kh,
+        dob_en: dobDate.en,
+        dob_kh: dobDate.kh,
+        pob_province: s.pob_province,
+      };
       page++;
       let index = 0;
       data.push({
@@ -669,7 +678,7 @@ async function generateStudentTestCertificatesPDF(passed_test_details) {
                     stack: [
                       enRowObject(
                         'Sex',
-                        student.gender.gd_en,
+                        student.gd_en,
                         dots[index++]
                       ),
                     ]
@@ -678,7 +687,7 @@ async function generateStudentTestCertificatesPDF(passed_test_details) {
               },
               enRowObject(
                 'Date of Birth',
-                dob_en,
+                student.dob_en,
                 dots[index++]
               ),
               enRowObject(
@@ -755,7 +764,7 @@ async function generateStudentTestCertificatesPDF(passed_test_details) {
               },
               khRowObject(
                 'របស់គណៈកម្មការវាយតម្លៃសមត្ថភាពនៅ',
-                'វិទ្យាស្ថានជាតិពហុបច្ចេកទេសកម្ពុជា',
+                'វិទ្យាស្ថានជាតិ',
                 dots[index++]
               ),
               {
@@ -775,7 +784,7 @@ async function generateStudentTestCertificatesPDF(passed_test_details) {
                     stack: [
                       khRowObject(
                         'ភេទ',
-                        student.gender.gd_kh,
+                        student.gd_kh,
                         dots[index++]
                       ),
                     ]
@@ -784,7 +793,7 @@ async function generateStudentTestCertificatesPDF(passed_test_details) {
               },
               khRowObject(
                 'កើតថ្ងៃទី',
-                dob_kh,
+                student.dob_kh,
                 dots[index++]
               ),
               khRowObject(
@@ -968,7 +977,7 @@ async function generateStudentTestCertificatesPDF(passed_test_details) {
               style: 'header_en',
             },
             {
-              text: 'វិទ្យាស្ថានជាតិពហុបច្ចេកទេសកម្ពុជា',
+              text: 'វិទ្យាស្ថានជាតិ',
               style: 'header_kh',
             },
             {
@@ -1063,7 +1072,7 @@ async function generateStudentTestCertificatesPDF(passed_test_details) {
         }
       },
       images: {
-        el1: window.origin + '/assets/images/elements/element1.png',
+        el1: el1DataUrl,
       },
       pageSize: 'A4',
       pageOrientation: 'landscape',
@@ -1091,19 +1100,15 @@ async function generateStudentTestCertificatesPDF(passed_test_details) {
     //     }
     //     console.log(dots)
     // }
-    const pdfDocGenerator = pdfMake.createPdf(docDefinition, null, window.FONTS);
-    return await new Promise(async (resolve, reject) => {
-      return await pdfDocGenerator.getDataUrl((dataUrl) => {
-        const iframe = document.querySelector('#PDF-MODAL iframe');
-        iframe.src = dataUrl;
-        $('#PDF-MODAL').modal('show');
-        resolve();
-      });
-    }).catch((error) => {
-      console.log(error);
-    });
+
+    const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+    const dataUrl = await pdfDocGenerator.getDataUrl();
+    const iframe = document.querySelector('iframe');
+    iframe.src = dataUrl;
+    $('#PDF-MODAL').modal('show');
   } catch (error) {
     console.log(error);
+
   }
 }
 
