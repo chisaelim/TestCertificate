@@ -18,6 +18,7 @@ use App\Observers\NationalityObserver;
 use App\Observers\ProvinceObserver;
 use App\Observers\ReligionObserver;
 use App\Observers\VillageObserver;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -45,5 +46,9 @@ class AppServiceProvider extends ServiceProvider
         Ethnicity::observe(EthnicityObserver::class);
         Nationality::observe(NationalityObserver::class);
         Religion::observe(ReligionObserver::class);
+
+        // Allow public access to Scramble-generated API docs in all environments.
+        // By default Scramble's RestrictedDocsAccess middleware only permits local viewing.
+        Gate::define('viewApiDocs', fn ($user = null) => true);
     }
 }
