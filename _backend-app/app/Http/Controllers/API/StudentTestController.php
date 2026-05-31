@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Requests\StudentTest\GetStudentTestsByGeographyRequest;
 use Carbon\Carbon;
 use Exception;
 use App\Models\StudentTest;
@@ -255,6 +256,31 @@ class StudentTestController extends Controller
 
         $student_tests = StudentTest::whereIn('id', $passed_ids)
             ->with($this->certificateEagerLoading)
+            ->get();
+
+        return response(
+            [
+                'student_tests' => DetailStudentTestResource::collection($student_tests),
+            ],
+            200,
+        );
+    }
+
+    public function getStudentTestsByGeography(GetStudentTestsByGeographyRequest $request, $id)
+    {
+        $student_tests = StudentTest::whereHas('student.placeOfBirth', function ($q) use ($id) {
+            $q->where('id', $id)
+                ->orWhereHas('parent', function ($q) use ($id) {
+                    $q->where('id', $id)
+                        ->orWhereHas('parent', function ($q) use ($id) {
+                            $q->where('id', $id)
+                                ->orWhereHas('parent', function ($q) use ($id) {
+                                    $q->where('id', $id);
+                                });
+                        });
+                });
+        })
+            ->with($this->manageEagerLoading)
             ->get();
 
         return response(

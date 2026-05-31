@@ -33,3 +33,7 @@ export function apiGetPassedStudentTestsForCertificates(passed_ids) {
 export function apiChangeStudentTestStatus(data) {
   return axios.patch(`${window.APP_API_URL}/student-tests/change/status`, data);
 }
+
+export function apiGetStudentTestsByGeography(id) {
+  return axios.get(`${window.APP_API_URL}/student-tests/by/geography/${id}`);
+}

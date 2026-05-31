@@ -16,8 +16,9 @@ import RightSidebar from "@/components/includes/RightSidebar.vue";
 import Footer from "@/components/includes/Footer.vue";
 import Student from '@/components/pages/Student.vue';
 import Test from '@/components/pages/Test.vue';
-import StudentTests from '@/components/pages/StudentTests.vue';
+import StudentTest from '@/components/pages/StudentTest.vue';
 import UserManagement from '@/components/pages/UserManagement.vue';
+import StudentTestClassify from '@/components/pages/StudentTestClassify.vue';
 
 const includeComponents = {
   navbar: Navbar,
@@ -100,6 +101,15 @@ const router = createRouter({
       meta: { guarded: true },
     },
     {
+      path: '/student-tests/classify',
+      name: 'student-tests/classify',
+      components: {
+        default: StudentTestClassify,
+        ...includeComponents
+      },
+      meta: { guarded: true },
+    },
+    {
       path: '/tests',
       name: 'tests',
       components: {
@@ -112,7 +122,7 @@ const router = createRouter({
       path: '/student-tests',
       name: 'student-tests',
       components: {
-        default: StudentTests,
+        default: StudentTest,
         ...includeComponents
       },
       meta: { guarded: true },

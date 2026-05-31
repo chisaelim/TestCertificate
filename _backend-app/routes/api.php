@@ -73,6 +73,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/create', [StudentController::class, 'createStudent']);
         Route::put('/update', [StudentController::class, 'updateStudent']);
         Route::delete('/delete/{id}', [StudentController::class, 'deleteStudent']);
+
     });
 
     Route::prefix('/assets')->group(function () {
@@ -103,6 +104,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/delete/{id}', [StudentTestController::class, 'deleteStudentTest']);
         Route::patch('/change/status', [StudentTestController::class, 'changeStudentTestStatus']);
         Route::get('/passed-for-certificates', [StudentTestController::class, 'getPassedStudentTestsForCertificates']);
+        Route::get('/by/geography/{id}', [StudentTestController::class, 'getStudentTestsByGeography']);
     });
 
     Route::middleware('_ADMINISTRATOR_')->group(function () {

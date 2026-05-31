@@ -28,6 +28,10 @@ const props = defineProps({
     type: String,
     default: 'xxx-',
   },
+  preSelect: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const cacheKey = computed(() => `${props.paramKey}${props.cacheTag}`);
@@ -43,7 +47,7 @@ watch(
       const url = new URL(window.location.href);
       const key = url.searchParams.get(cacheKey.value);
 
-      model.value = options.find((option) => option.id == key) ?? options[0];
+      model.value = options.find((option) => option.id == key) ?? (props.preSelect ? options[0] : null);
       return;
     }
     model.value = null;
