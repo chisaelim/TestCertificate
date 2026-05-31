@@ -8,19 +8,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Copy files to VPS via SSH
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
-          port: 22
-          source: "."
-          target: "~/testcertificate.ultralink.cloud"
+      # - name: Copy files to VPS via SSH
+      #   uses: appleboy/scp-action@v0.1.7
+      #   with:
+      #     host: ${{ secrets.VPS_HOST }}
+      #     username: ${{ secrets.VPS_USER }}
+      #     key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+      #     port: 22
+      #     source: "."
+      #     target: "~/testcertificate.ultralink.cloud"
       - name: Sync files to VPS via rsync
         uses: burnett01/rsync-deployments@7.0.1
         with:
-          switches: -avzr --delete --exclude='_backend-app/.env' --exclude='_backend-app/public/storage/' --exclude='_backend-app/storage/' --exclude='_backend-app/vendor/' --exclude='_frontend-app/.env' --exclude='_frontend-app/node_modules/'
+          switches: -avzr --delete --exclude=_backend-app/.env --exclude=_backend-app/public/storage/ --exclude=_backend-app/storage/ --exclude=_backend-app/vendor/ --exclude=_frontend-app/.env --exclude=_frontend-app/node_modules/
           path: .
           remote_path: "~/testcertificate.ultralink.cloud"
           remote_host: ${{ secrets.VPS_HOST }}
