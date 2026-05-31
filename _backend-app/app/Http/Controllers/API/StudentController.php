@@ -20,10 +20,6 @@ use App\Http\Requests\Student\DeleteStudentRequest;
 
 class StudentController extends Controller
 {
-    private $referenceEagerLoading = [
-        'gender',
-    ];
-
     private $manageEagerLoading = [
         'gender',
         'creator',

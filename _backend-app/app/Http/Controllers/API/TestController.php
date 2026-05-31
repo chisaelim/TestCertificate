@@ -30,7 +30,7 @@ class TestController extends Controller
             [
                 'tests' => TestResource::collection($tests),
             ],
-            200
+            200,
         );
     }
 
@@ -48,7 +48,6 @@ class TestController extends Controller
 
     public function createTest(CreateTestRequest $request)
     {
-        $user = $request->user();
         $validated = $request->validated();
 
         $name_kh = $validated['name_kh'];
@@ -80,7 +79,6 @@ class TestController extends Controller
 
     public function updateTest(UpdateTestRequest $request)
     {
-        $user = $request->user();
         $validated = $request->validated();
 
         $id = $validated['id'];
@@ -88,8 +86,12 @@ class TestController extends Controller
         $name_en = $validated['name_en'];
         $short_name = $validated['short_name'];
 
+        $test = Test::find($id);
+        if (!$test) {
+            return ResponseHelper::notFoundErrorMsg();
+        }
+
         try {
-            $test = Test::find($id);
             $test->name_kh = $name_kh;
             $test->name_en = $name_en;
             $test->short_name = $short_name;

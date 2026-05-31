@@ -48,7 +48,6 @@ class StudentTestController extends Controller
             200,
         );
     }
-
     public function getStudentTestsWithDetailsByStudent(GetStudentTestsByStudentIdRequest $request, $id)
     {
         $student_tests = StudentTest::where('student_id', $id)
@@ -62,7 +61,31 @@ class StudentTestController extends Controller
             200,
         );
     }
+    public function getStudentTestsByIssuedDate(GetStudentTestsByIssuedDateRequest $request, $issued_date)
+    {
+        $student_tests = StudentTest::where('issued_date', Carbon::createFromFormat('d-m-Y', $issued_date)->format('Y-m-d'))
+            ->get();
 
+        return response(
+            [
+                'student_tests' => StudentTestResource::collection($student_tests),
+            ],
+            200,
+        );
+    }
+    public function getStudentTestsWithDetailsByIssuedDate(GetStudentTestsByIssuedDateRequest $request, $issued_date)
+    {
+        $student_tests = StudentTest::where('issued_date', Carbon::createFromFormat('d-m-Y', $issued_date)->format('Y-m-d'))
+            ->with($this->manageEagerLoading)
+            ->get();
+
+        return response(
+            [
+                'student_tests' => DetailStudentTestResource::collection($student_tests),
+            ],
+            200,
+        );
+    }
     public function createStudentTest(CreateStudentTestRequest $request)
     {
         $validated = $request->validated();
@@ -106,7 +129,6 @@ class StudentTestController extends Controller
             201,
         );
     }
-
     public function updateStudentTest(UpdateStudentTestRequest $request)
     {
         $validated = $request->validated();
@@ -152,7 +174,6 @@ class StudentTestController extends Controller
             200,
         );
     }
-
     public function readStudentTest(ReadStudentTestRequest $request, $id)
     {
         $student_test = StudentTest::where('id', $id)
@@ -170,7 +191,6 @@ class StudentTestController extends Controller
             200,
         );
     }
-
     public function deleteStudentTest(DeleteStudentTestRequest $request, $id)
     {
         $student_test = StudentTest::where('id', $id)
@@ -195,7 +215,6 @@ class StudentTestController extends Controller
             200,
         );
     }
-
     public function changeStudentTestStatus(ChangeStudentTestStatusRequest $request)
     {
         $validated = $request->validated();
@@ -229,22 +248,6 @@ class StudentTestController extends Controller
             200,
         );
     }
-
-    public function getStudentTestsByIssuedDate(GetStudentTestsByIssuedDateRequest $request, $issued_date)
-    {
-        $student_tests = StudentTest::where('issued_date', Carbon::createFromFormat('d-m-Y', $issued_date)->format('Y-m-d'))
-            ->with($this->manageEagerLoading)
-            ->get();
-
-        return response(
-            [
-                'student_tests' => DetailStudentTestResource::collection($student_tests),
-            ],
-            200,
-        );
-    }
-
-
     public function getPassedStudentTestsForCertificates(GetPassedStudentTestsForCertificatesRequest $request)
     {
         $validated = $request->validated();

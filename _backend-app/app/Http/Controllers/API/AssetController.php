@@ -15,8 +15,6 @@ use App\Http\Requests\Asset\GetAllGendersRequest;
 use App\Http\Requests\Asset\GetAllEthnicitiesRequest;
 use App\Http\Requests\Asset\GetAllNationalitiesRequest;
 use App\Http\Requests\Asset\GetAllReligionsRequest;
-use App\Http\Requests\Asset\GetJobSuggestionsRequest;
-use DB;
 use Illuminate\Support\Facades\Cache;
 
 class AssetController extends Controller

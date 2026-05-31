@@ -93,8 +93,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/student-tests')->group(function () {
         Route::get('/by/student/{id}', [StudentTestController::class, 'getStudentTestsByStudent']);
         Route::get('/details/by/student/{id}', [StudentTestController::class, 'getStudentTestsWithDetailsByStudent']);
-        Route::get('/read/{id}', [StudentTestController::class, 'readStudentTest']);
         Route::get('/by/issued-date/{issued_date}', [StudentTestController::class, 'getStudentTestsByIssuedDate']);
+        Route::get('/details/by/issued-date/{issued_date}', [StudentTestController::class, 'getStudentTestsWithDetailsByIssuedDate']);
+
+        Route::get('/read/{id}', [StudentTestController::class, 'readStudentTest']);
         Route::post('/create', [StudentTestController::class, 'createStudentTest']);
         Route::put('/update', [StudentTestController::class, 'updateStudentTest']);
         Route::delete('/delete/{id}', [StudentTestController::class, 'deleteStudentTest']);

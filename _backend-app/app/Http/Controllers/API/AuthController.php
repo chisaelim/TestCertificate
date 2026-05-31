@@ -22,7 +22,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    function signup(SignupRequest $request)
+    public function signup(SignupRequest $request)
     {
         $user = User::create([
             'name' => $request->name,
@@ -38,7 +38,7 @@ class AuthController extends Controller
         ], 201);
     }
 
-    function signin(SigninRequest $request)
+    public function signin(SigninRequest $request)
     {
         $user = User::where('email', $request->email)->first();
 
@@ -63,23 +63,16 @@ class AuthController extends Controller
         ], 200);
     }
 
-    function signout(Request $request)
+    public function signout(Request $request)
     {
-        $user = $request->user();
-
-        // option 1
-        $user->currentAccessToken()->delete();
-
-        // option 2
-        $currentToken = $user->currentAccessToken();
-        $user->tokens()->where('id', $currentToken->id)->delete();
+        $request->user()->currentAccessToken()->delete();
 
         return response([
             'message' => 'User signed out.'
         ], 200);
     }
 
-    function verify(Request $request)
+    public function verify(Request $request)
     {
         return response([
             'message' => 'Token is valid.',
@@ -87,7 +80,7 @@ class AuthController extends Controller
         ], 200);
     }
 
-    function verifyEmail(Request $request)
+    public function verifyEmail(Request $request)
     {
         $user = User::findOrFail($request->route('id'));
 
@@ -104,7 +97,7 @@ class AuthController extends Controller
         ], 200);
     }
 
-    function sendVerificationEmail(SendVerificationEmailRequest $request)
+    public function sendVerificationEmail(SendVerificationEmailRequest $request)
     {
         $user = User::where('email', $request->email)->first();
 
@@ -121,7 +114,7 @@ class AuthController extends Controller
         ], 200);
     }
 
-    function sendResetPasswordEmail(SendResetPasswordEmailRequest $request)
+    public function sendResetPasswordEmail(SendResetPasswordEmailRequest $request)
     {
         $user = User::where('email', $request->email)->first();
 
@@ -149,7 +142,7 @@ class AuthController extends Controller
         ], 200);
     }
 
-    function setNewPassword(SetNewPasswordRequest $request)
+    public function setNewPassword(SetNewPasswordRequest $request)
     {
         $status = Password::reset(
             [
@@ -176,7 +169,7 @@ class AuthController extends Controller
         ], 200);
     }
 
-    function createPassword(CreatePasswordRequest $request)
+    public function createPassword(CreatePasswordRequest $request)
     {
         $user = $request->user();
         if (!empty($user->password)) {
@@ -192,7 +185,7 @@ class AuthController extends Controller
         ], 200);
     }
 
-    function changePassword(ChangePasswordRequest $request)
+    public function changePassword(ChangePasswordRequest $request)
     {
         $user = $request->user();
         if (!Hash::check($request->current_password, $user->password)) {
@@ -213,7 +206,7 @@ class AuthController extends Controller
         ], 200);
     }
 
-    function updateProfileImage(UpdateProfileImageRequest $request)
+    public function updateProfileImage(UpdateProfileImageRequest $request)
     {
         $imageClass = ImageClassService::forUserModel();
         $user = $request->user();
@@ -240,7 +233,7 @@ class AuthController extends Controller
         ], 200);
     }
 
-    function deleteProfileImage(Request $request)
+    public function deleteProfileImage(Request $request)
     {
         $imageClass = ImageClassService::forUserModel();
         $user = $request->user();

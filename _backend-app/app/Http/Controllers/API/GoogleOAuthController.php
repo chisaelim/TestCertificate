@@ -10,7 +10,7 @@ use Laravel\Socialite\Socialite;
 
 class GoogleOAuthController extends Controller
 {
-    function googleOAuthRedirect(Request $request)
+    public function googleOAuthRedirect(Request $request)
     {
         $callback_url = $request->query('callback_url', '');
 
@@ -23,7 +23,7 @@ class GoogleOAuthController extends Controller
         return response(['redirect_url' => $redirectUrl], 200);
     }
 
-    function googleOAuthCallback(Request $request)
+    public function googleOAuthCallback(Request $request)
     {
         $callback_url = base64_decode($request->query('state', ''));
         try {
@@ -49,7 +49,7 @@ class GoogleOAuthController extends Controller
         return redirect($callback_url . '?token=' . urlencode($token));
     }
 
-    function googleOAuthExchangeToken(Request $request)
+    public function googleOAuthExchangeToken(Request $request)
     {
         $user = $request->user();
 

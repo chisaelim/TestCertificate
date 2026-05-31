@@ -317,7 +317,7 @@ watch(issued_date, async () => {
 
 async function generateStudentTestsByIssuedDate() {
   try {
-    const response = await apiGetStudentTestsByIssuedDate(issued_date.value);
+    const response = await apiGetStudentTestsWithDetailsByIssuedDate(issued_date.value);
     student_tests.value = response.data.student_tests;
   } catch (error) {
     throw error;
