@@ -1,0 +1,51 @@
+name: CI/CD pipeline for TestCertificate
+on:
+  push:
+    branches: [master]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Copy files to VPS via SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+          port: 22
+          source: "."
+          target: "~/testcertificate.ultralink.cloud"
+      - name: Sync files to VPS via rsync
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avzr --delete --exclude='_backend-app/.env' --exclude='_backend-app/public/storage/' --exclude='_backend-app/storage/' --exclude='_backend-app/vendor/' --exclude='_frontend-app/.env' --exclude='_frontend-app/node_modules/'
+          path: .
+          remote_path: "~/testcertificate.ultralink.cloud"
+          remote_host: ${{ secrets.VPS_HOST }}
+          remote_user: ${{ secrets.VPS_USER }}
+          remote_key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+      - name: Deploy Backend and Frontend on VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            # Deploy Backend
+            cd ~/testcertificate.ultralink.cloud
+            docker compose --env-file ./_backend-app/.env -f compose.production.yaml down || true
+            docker compose --env-file ./_backend-app/.env -f compose.production.yaml up -d --build
+
+            # Install nginx if not installed
+            sudo apt update && sudo apt install -y nginx
+
+            # Overwrite nginx config file
+            sudo cp ~/testcertificate.ultralink.cloud/testcertificate.nginx.conf /etc/nginx/sites-available/testcertificate.nginx.conf
+            sudo ln -sf /etc/nginx/sites-available/testcertificate.nginx.conf /etc/nginx/sites-enabled/
+            sudo rm -f /etc/nginx/sites-enabled/default
+
+            # Test and reload nginx
+            sudo systemctl enable nginx && sudo systemctl start nginx && sudo systemctl reload nginx

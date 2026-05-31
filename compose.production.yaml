@@ -1,0 +1,78 @@
+services:
+  backend-service:
+    container_name: backend-container
+    build:
+      context: .
+      dockerfile: docker/_backend/Dockerfile
+    working_dir: /var/www/html
+    volumes:
+      - ./_backend-app:/var/www/html
+      - ./docker/_backend/entrypoint.production.sh:/usr/local/bin/entrypoint.production.sh
+      - ./docker/_backend/supervisord.production.conf:/etc/supervisor/conf.d/supervisord.production.conf
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql-service:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/up" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    command: [ "bash", "/usr/local/bin/entrypoint.production.sh" ]
+    restart: unless-stopped
+
+  frontend-service:
+    container_name: frontend-container
+    build:
+      context: .
+      dockerfile: docker/_frontend/Dockerfile
+    working_dir: /app
+    volumes:
+      - ./_frontend-app:/app
+      - ./docker/_frontend/entrypoint.production.sh:/usr/local/bin/entrypoint.production.sh
+    ports:
+      - "5173:5173"
+    depends_on:
+      backend-service:
+        condition: service_healthy
+    command: [ "sh", "/usr/local/bin/entrypoint.production.sh" ]
+    restart: unless-stopped
+
+  mysql-service:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      TZ: UTC
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.2
+    container_name: phpmyadmin-container
+    depends_on:
+      mysql-service:
+        condition: service_healthy
+    environment:
+      PMA_AUTH_TYPE: cookie
+      UPLOAD_LIMIT: 50M
+      PMA_HOST: mysql-service
+      PMA_PORT: 3306
+      PMA_ABSOLUTE_URI: https://testcertificate-database.ultralink.cloud/
+    restart: unless-stopped
+    ports:
+      - "9000:80"
+volumes:
+  mysql_data:
