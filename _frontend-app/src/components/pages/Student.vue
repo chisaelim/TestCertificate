@@ -2,14 +2,14 @@
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row">
+        <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">ទិន្នន័យសិស្ស</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <router-link :to="{ name: 'dashboard' }">Home</router-link>
+                <router-link :to="{ name: 'dashboard' }">ទំព័រដើម</router-link>
               </li>
               <li class="breadcrumb-item active">ទិន្នន័យសិស្ស</li>
             </ol>
@@ -37,19 +37,6 @@ const StudentModalRef = ref();
 
 const students = ref([]);
 const columns = [
-  // {
-  //   accessorKey: "photo",
-  //   header: "",
-  //   cell: (cell) =>
-  //     h("img", {
-  //       style: "max-width: 50px",
-  //       class: "profile-user-img img-fluid img-circle",
-  //       src:
-  //         cell.getValue() !== null
-  //           ? "/storage/images/students/thumbnails/" + cell.getValue()
-  //           : "/assets/images/emptyProfile.png",
-  //     }),
-  // },
   {
     accessorKey: 'name_kh',
     header: 'ឈ្មោះជាអក្សរខ្មែរ',
@@ -131,12 +118,8 @@ onMounted(async () => {
 });
 
 async function generateStudents() {
-  try {
-    const response = await apiGetStudentsWithDetails();
-    students.value = response.data.students;
-  } catch (error) {
-    throw error;
-  }
+  const response = await apiGetStudentsWithDetails();
+  students.value = response.data.students;
 }
 
 const onStudentCreated = (student) => {

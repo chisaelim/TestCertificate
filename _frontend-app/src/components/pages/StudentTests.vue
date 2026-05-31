@@ -125,7 +125,7 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="PDF-MODAL" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+  <div class="modal fade" id="PDF-MODAL" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
 
@@ -192,7 +192,7 @@ const student_test_columns = [
     header: () => [
       "ជម្រើស",
       h(
-        "a",
+        "button",
         {
           onClick: () => $("#test-detail-modal").modal("show"),
           class: "btn btn-sm btn-success ml-3",
@@ -203,7 +203,7 @@ const student_test_columns = [
     cell: ({ row }) => [
       // delete btn
       h(
-        "a",
+        "button",
         {
           onClick: () => removeStudentTest(row.original.id),
           class: "btn btn-sm btn-outline-danger mx-1",
@@ -212,7 +212,7 @@ const student_test_columns = [
       ),
       // view btn
       h(
-        "a",
+        "button",
         {
           onClick: () => viewStudentTest(row.original.id),
           class: "btn btn-sm btn-secondary mx-1",
@@ -221,7 +221,7 @@ const student_test_columns = [
       ),
       row.original.status !== "PASSED"
         ? h(
-          "a",
+          "button",
           {
             onClick: () =>
               changeStudentTestStatus(row.original.id, "PASSED"),
@@ -232,7 +232,7 @@ const student_test_columns = [
         : null,
       row.original.status !== "FAILED"
         ? h(
-          "a",
+          "button",
           {
             onClick: () =>
               changeStudentTestStatus(row.original.id, "FAILED"),
@@ -243,6 +243,7 @@ const student_test_columns = [
         : null,
     ],
     enableSorting: false,
+    enableGlobalFilter: false,
   },
 ];
 
@@ -316,28 +317,16 @@ watch(issued_date, async () => {
 });
 
 async function generateStudentTestsByIssuedDate() {
-  try {
-    const response = await apiGetStudentTestsWithDetailsByIssuedDate(issued_date.value);
-    student_tests.value = response.data.student_tests;
-  } catch (error) {
-    throw error;
-  }
+  const response = await apiGetStudentTestsWithDetailsByIssuedDate(issued_date.value);
+  student_tests.value = response.data.student_tests;
 }
 async function generateTests() {
-  try {
-    const response = await apiGetTests();
-    tests.value = response.data.tests;
-  } catch (error) {
-    throw error;
-  }
+  const response = await apiGetTests();
+  tests.value = response.data.tests;
 }
 async function generateStudents() {
-  try {
-    const response = await apiGetStudentsWithDetails();
-    students.value = response.data.students;
-  } catch (error) {
-    throw error;
-  }
+  const response = await apiGetStudentsWithDetails();
+  students.value = response.data.students;
 }
 
 async function saveStudentTest() {
@@ -505,6 +494,7 @@ const passed_columns = [
         ]
       ),
     enableSorting: false,
+    enableGlobalFilter: false,
   },
   {
     accessorKey: "student.name_kh",
@@ -526,10 +516,6 @@ const passed_columns = [
   {
     accessorKey: "test.name_en",
     header: "ឈ្មោះតេស្តជាភាសាអង់គ្លេស",
-  },
-  {
-    accessorKey: "student.gender.gd_kh_full",
-    header: "ភេទ",
   },
 ];
 
@@ -634,7 +620,7 @@ async function generateStudentTestCertificatesPDF(passed_test_details) {
     };
     let page = 0;
     const data = [];
-    for (const { qr_code, issued_date, expired_date, student, test } of passed_test_details) {
+    for (const { issued_date, expired_date, student, test } of passed_test_details) {
       const issued_date_en = toDateEn(issued_date);
       const issued_date_kh = toDateKh(issued_date);
       const expired_date_en = toDateEn(expired_date);

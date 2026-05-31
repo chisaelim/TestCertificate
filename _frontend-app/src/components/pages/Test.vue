@@ -136,6 +136,7 @@ const columns = [
         ),
       ],
     enableSorting: false,
+    enableGlobalFilter: false,
   }
 ];
 
@@ -169,12 +170,8 @@ onMounted(async () => {
 });
 
 async function generateTests() {
-  try {
-    const response = await apiGetTestsWithDetails();
-    tests.value = response.data.tests;
-  } catch (error) {
-    throw error;
-  }
+  const response = await apiGetTestsWithDetails();
+  tests.value = response.data.tests;
 }
 async function saveTest() {
   try {

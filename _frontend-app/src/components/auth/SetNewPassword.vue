@@ -83,18 +83,20 @@ async function setNewPassword() {
       router.push({ name: 'auth.signin' });
     });
   } catch (error) {
-    if (!error.response) {
-      return MessageModal("error", "Error", error.message);
+    const { response } = error;
+    if (!response) {
+      return MessageModal({ icon: "error", title: "Error", text: error.message });
     }
-    if (error.response.status === 422) {
+    const { status, data } = response;
+    if (status === 422) {
       Object.keys(userError).forEach((key) => {
-        userError[key] = error.response.data.errors[key]
-          ? error.response.data.errors[key][0]
+        userError[key] = data.errors[key]
+          ? data.errors[key][0]
           : "";
       });
       return CloseModal();
     }
-    return MessageModal("error", "Error", error.response.data.message);
+    return MessageModal({ icon: "error", title: "Error", text: data.message });
   }
 }
 </script>
