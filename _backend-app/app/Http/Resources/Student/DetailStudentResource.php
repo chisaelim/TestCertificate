@@ -6,6 +6,10 @@ use App\Http\Resources\Asset\EthnicityResource;
 use App\Http\Resources\Asset\GenderResource;
 use App\Http\Resources\Asset\NationalityResource;
 use App\Http\Resources\Asset\ReligionResource;
+use App\Http\Resources\Geography\VillageResource;
+use App\Http\Resources\Geography\CommuneResource;
+use App\Http\Resources\Geography\DistrictResource;
+use App\Http\Resources\Geography\ProvinceResource;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -24,20 +28,40 @@ class DetailStudentResource extends JsonResource
             'phone' => $this->phone,
             'photo' => $this->photo,
             'thumbnail' => $this->thumbnail,
-
-            'gender_id' => $this->gender_id,
-            'nationality_id' => $this->nationality_id,
-            'ethnicity_id' => $this->ethnicity_id,
-            'religion_id' => $this->religion_id,
-            'pob_village_id' => $this->pob_village_id,
-            'pob_commune_id' => $this->pob_commune_id,
-            'pob_district_id' => $this->pob_district_id,
-            'pob_province_id' => $this->pob_province_id,
-            'por_village_id' => $this->por_village_id,
-            'por_commune_id' => $this->por_commune_id,
-            'por_district_id' => $this->por_district_id,
-            'por_province_id' => $this->por_province_id,
-
+            'pob_village' => $this->whenLoaded('placeOfBirth', fn() => new VillageResource(
+                $this->placeOfBirth?->parent?->parent?->parent ? $this->placeOfBirth : null
+            )),
+            'pob_commune' => $this->whenLoaded('placeOfBirth', fn() => new CommuneResource(
+                $this->placeOfBirth?->parent?->parent?->parent ? $this->placeOfBirth->parent
+                : ($this->placeOfBirth?->parent?->parent ? $this->placeOfBirth : null)
+            )),
+            'pob_district' => $this->whenLoaded('placeOfBirth', fn() => new DistrictResource(
+                $this->placeOfBirth?->parent?->parent?->parent ? $this->placeOfBirth->parent->parent
+                : ($this->placeOfBirth?->parent?->parent ? $this->placeOfBirth->parent
+                    : ($this->placeOfBirth?->parent ? $this->placeOfBirth : null))
+            )),
+            'pob_province' => $this->whenLoaded('placeOfBirth', fn() => new ProvinceResource(
+                $this->placeOfBirth?->parent?->parent?->parent ? $this->placeOfBirth->parent->parent->parent
+                : ($this->placeOfBirth?->parent?->parent ? $this->placeOfBirth->parent->parent
+                    : ($this->placeOfBirth?->parent ? $this->placeOfBirth->parent : $this->placeOfBirth))
+            )),
+            'por_village' => $this->whenLoaded('placeOfResidence', fn() => new VillageResource(
+                $this->placeOfResidence?->parent?->parent?->parent ? $this->placeOfResidence : null
+            )),
+            'por_commune' => $this->whenLoaded('placeOfResidence', fn() => new CommuneResource(
+                $this->placeOfResidence?->parent?->parent?->parent ? $this->placeOfResidence->parent
+                : ($this->placeOfResidence?->parent?->parent ? $this->placeOfResidence : null)
+            )),
+            'por_district' => $this->whenLoaded('placeOfResidence', fn() => new DistrictResource(
+                $this->placeOfResidence?->parent?->parent?->parent ? $this->placeOfResidence->parent->parent
+                : ($this->placeOfResidence?->parent?->parent ? $this->placeOfResidence->parent
+                    : ($this->placeOfResidence?->parent ? $this->placeOfResidence : null))
+            )),
+            'por_province' => $this->whenLoaded('placeOfResidence', fn() => new ProvinceResource(
+                $this->placeOfResidence?->parent?->parent?->parent ? $this->placeOfResidence->parent->parent->parent
+                : ($this->placeOfResidence?->parent?->parent ? $this->placeOfResidence->parent->parent
+                    : ($this->placeOfResidence?->parent ? $this->placeOfResidence->parent : $this->placeOfResidence))
+            )),
             'gender' => $this->whenLoaded('gender', fn() => new GenderResource($this->gender)),
             'nationality' => $this->whenLoaded('nationality', fn() => new NationalityResource($this->nationality)),
             'ethnicity' => $this->whenLoaded('ethnicity', fn() => new EthnicityResource($this->ethnicity)),

@@ -37,6 +37,8 @@ class StudentController extends Controller
         'religion',
         'creator',
         'updater',
+        'placeOfBirth.parent.parent.parent',
+        'placeOfResidence.parent.parent.parent',
     ];
 
     public function getStudents(GetStudentsRequest $request)

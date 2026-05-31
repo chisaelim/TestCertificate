@@ -355,7 +355,6 @@ onMounted(async () => {
   }
 });
 watch(() => studentObj.pob_province_id, async (nv, ov) => {
-  console.log(nv);
   const response = await generateDistrictsByProvince(nv);
   pobDistricts.value = response.data.districts;
   if (!pobDistricts.value.find(d => d.id === studentObj.pob_district_id)) {
@@ -448,8 +447,23 @@ async function viewStudent(id) {
   try {
     LoadingModal();
     const response = await apiReadStudent(id);
-    const { photo, ...newStudentObj } = response.data.student;
-    Object.assign(studentObj, newStudentObj);
+    const {
+      photo,
+      pob_village, pob_commune, pob_district, pob_province,
+      por_village, por_commune, por_district, por_province,
+      ...rest
+    } = response.data.student;
+    Object.assign(studentObj, {
+      ...rest,
+      pob_province_id: pob_province?.id ?? null,
+      pob_district_id: pob_district?.id ?? null,
+      pob_commune_id: pob_commune?.id ?? null,
+      pob_village_id: pob_village?.id ?? null,
+      por_province_id: por_province?.id ?? null,
+      por_district_id: por_district?.id ?? null,
+      por_commune_id: por_commune?.id ?? null,
+      por_village_id: por_village?.id ?? null,
+    });
     studentObj.photo = photo;
     currentImage.value = photo;
     showStudentModal();
