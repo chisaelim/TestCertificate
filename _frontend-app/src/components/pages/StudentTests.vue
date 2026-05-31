@@ -52,7 +52,7 @@
   </div>
   <div class="modal fade" id="test-detail-modal" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <form @submit.prevent="saveStudentTest()">
-      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">ការគ្រប់គ្រងព័ត៌មានតេស្តរបស់សិស្ស</h5>
@@ -125,7 +125,7 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="PDF-MODAL" data-backdrop="static" data-keyboard="false" tabindex="-1">
+  <div class="modal fade" id="PDF-MODAL" tabindex="-1">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-body">
@@ -286,7 +286,8 @@ const studentTestErrObj = reactive({
   issued_date: null,
 });
 
-const defaultStudentTestObj = JSON.parse(JSON.stringify(studentTestObj));
+const { issued_date: _omit, ...studentTestSnapshot } = { ...studentTestObj };
+const defaultStudentTestObj = JSON.parse(JSON.stringify(studentTestSnapshot));
 const defaultStudentTestErrObj = JSON.parse(JSON.stringify(studentTestErrObj));
 
 onMounted(async () => {
@@ -658,7 +659,7 @@ async function generateStudentTestCertificatesPDF(passed_test_details) {
               ),
               enRowObject(
                 'Of competency assessment at',
-                'National Polytechnic Institute of Cambodia',
+                'Institute of Cambodia',
                 dots[index++]
               ),
               {
@@ -981,7 +982,7 @@ async function generateStudentTestCertificatesPDF(passed_test_details) {
               style: 'header_kh',
             },
             {
-              text: 'NATIONAL POLYTECHNIC INSTITUTE OF CAMBODIA',
+              text: 'INSTITUTE OF CAMBODIA',
               style: 'header_en',
             },
           ],

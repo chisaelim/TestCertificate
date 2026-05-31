@@ -1,6 +1,6 @@
 <template>
   <div class="modal fade" id="student-modal" data-backdrop="static" data-keyboard="false" tabindex="-1">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-dialog modal-xl">
       <form @submit.prevent="saveStudent()">
         <div class="modal-content">
           <div class="modal-header">
