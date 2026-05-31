@@ -355,6 +355,8 @@ onMounted(async () => {
   }
 });
 watch(() => studentObj.pob_province_id, async (nv, ov) => {
+  pobDistricts.value = [];
+  if (!nv) return;
   const response = await generateDistrictsByProvince(nv);
   pobDistricts.value = response.data.districts;
   if (!pobDistricts.value.find(d => d.id === studentObj.pob_district_id)) {
@@ -362,6 +364,8 @@ watch(() => studentObj.pob_province_id, async (nv, ov) => {
   }
 });
 watch(() => studentObj.pob_district_id, async (nv, ov) => {
+  pobCommunes.value = [];
+  if (!nv) return;
   const response = await generateCommunesByDistrict(nv);
   pobCommunes.value = response.data.communes;
   if (!pobCommunes.value.find(c => c.id === studentObj.pob_commune_id)) {
@@ -369,6 +373,8 @@ watch(() => studentObj.pob_district_id, async (nv, ov) => {
   }
 });
 watch(() => studentObj.pob_commune_id, async (nv, ov) => {
+  pobVillages.value = [];
+  if (!nv) return;
   const response = await generateVillagesByCommune(nv);
   pobVillages.value = response.data.villages;
   if (!pobVillages.value.find(v => v.id === studentObj.pob_village_id)) {
@@ -378,6 +384,8 @@ watch(() => studentObj.pob_commune_id, async (nv, ov) => {
 
 // POR geography watchers
 watch(() => studentObj.por_province_id, async (nv, ov) => {
+  porDistricts.value = [];
+  if (!nv) return;
   const response = await generateDistrictsByProvince(nv);
   porDistricts.value = response.data.districts;
   if (!porDistricts.value.find(d => d.id === studentObj.por_district_id)) {
@@ -385,6 +393,8 @@ watch(() => studentObj.por_province_id, async (nv, ov) => {
   }
 });
 watch(() => studentObj.por_district_id, async (nv, ov) => {
+  porCommunes.value = [];
+  if (!nv) return;
   const response = await generateCommunesByDistrict(nv);
   porCommunes.value = response.data.communes;
   if (!porCommunes.value.find(c => c.id === studentObj.por_commune_id)) {
@@ -392,6 +402,8 @@ watch(() => studentObj.por_district_id, async (nv, ov) => {
   }
 });
 watch(() => studentObj.por_commune_id, async (nv, ov) => {
+  porVillages.value = [];
+  if (!nv) return;
   const response = await generateVillagesByCommune(nv);
   porVillages.value = response.data.villages;
   if (!porVillages.value.find(v => v.id === studentObj.por_village_id)) {
@@ -405,9 +417,13 @@ async function buildFormData(data, includePhoto) {
     if (key === 'photo') return;
     if (value !== null && value !== undefined) form.append(key, value);
   });
-  if (includePhoto && data.photo) {
-    const blob = await (await fetch(data.photo)).blob();
-    form.append('photo', blob, 'photo.jpg');
+  if (includePhoto) {
+    if (data.photo) {
+      const blob = await (await fetch(data.photo)).blob();
+      form.append('photo', blob, 'photo.jpg');
+    } else {
+      form.append('photo', '');
+    }
   }
   return form;
 }

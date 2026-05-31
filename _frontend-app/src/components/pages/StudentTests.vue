@@ -137,14 +137,22 @@
   </div>
 </template>
 <script setup>
-
-
-
+import emptyImage from '@/assets/images/emptyImage.png';
 
 const issued_date = ref(moment().format('DD-MM-YYYY'));
-
 const student_tests = ref([]);
 const student_test_columns = [
+  {
+    accessorKey: "student.photo",
+    header: "",
+    cell: (cell) =>
+      h("img", {
+        style: "max-width: 50px",
+        class: "profile-user-img img-fluid img-circle",
+        src:
+          cell.getValue() || emptyImage,
+      }),
+  },
   {
     accessorKey: "student.name_kh",
     header: "ឈ្មោះសិស្សជាអក្សរខ្មែរ",

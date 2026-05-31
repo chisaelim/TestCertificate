@@ -175,7 +175,7 @@ class StudentController extends Controller
             DB::beginTransaction();
 
             if ($request->has('photo')) {
-                if (!empty($validated['photo'])) {
+                if ($request->hasFile('photo')) {
                     $newImage = $imageClass->store($request->file('photo'));
                 }
                 $student->photo = $newImage;

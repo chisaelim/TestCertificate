@@ -32,11 +32,22 @@
 </template>
 
 <script setup>
-
+import emptyImage from '@/assets/images/emptyImage.png';
 const StudentModalRef = ref();
 
 const students = ref([]);
 const columns = [
+  {
+    accessorKey: "photo",
+    header: "",
+    cell: (cell) =>
+      h("img", {
+        style: "max-width: 50px",
+        class: "profile-user-img img-fluid img-circle",
+        src:
+          cell.getValue() || emptyImage,
+      }),
+  },
   {
     accessorKey: 'name_kh',
     header: 'ឈ្មោះជាអក្សរខ្មែរ',
