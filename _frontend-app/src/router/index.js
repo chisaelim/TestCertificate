@@ -16,6 +16,7 @@ import RightSidebar from "@/components/includes/RightSidebar.vue";
 import Footer from "@/components/includes/Footer.vue";
 import Student from '@/components/pages/Student.vue';
 import Test from '@/components/pages/Test.vue';
+import StudentTests from '@/components/pages/StudentTests.vue';
 
 const includeComponents = {
   navbar: Navbar,
@@ -102,6 +103,15 @@ const router = createRouter({
       name: 'tests',
       components: {
         default: Test,
+        ...includeComponents
+      },
+      meta: { guarded: true },
+    },
+    {
+      path: '/student-tests',
+      name: 'student-tests',
+      components: {
+        default: StudentTests,
         ...includeComponents
       },
       meta: { guarded: true },

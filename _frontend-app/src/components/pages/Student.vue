@@ -132,8 +132,8 @@ onMounted(async () => {
 
 async function generateStudents() {
   try {
-    const res = await apiGetStudentsWithDetails();
-    students.value = res.data.students;
+    const response = await apiGetStudentsWithDetails();
+    students.value = response.data.students;
   } catch (error) {
     throw error;
   }

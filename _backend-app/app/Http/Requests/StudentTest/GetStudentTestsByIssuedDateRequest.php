@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Student;
+namespace App\Http\Requests\StudentTest;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GetStudentsRequest extends FormRequest
+class GetStudentTestsByIssuedDateRequest extends FormRequest
 {
     public function authorize(): bool
     {

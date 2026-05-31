@@ -60,8 +60,6 @@ class TestController extends Controller
                 'name_kh' => $name_kh,
                 'name_en' => $name_en,
                 'short_name' => $short_name,
-                'creator' => $user->id_user,
-                'updater' => $user->id_user,
             ]);
 
             $test = Test::where('id', $test->id)

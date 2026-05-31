@@ -5,6 +5,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\GeographyController;
 use App\Http\Controllers\API\GoogleOAuthController;
 use App\Http\Controllers\API\StudentController;
+use App\Http\Controllers\API\StudentTestController;
 use App\Http\Controllers\API\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,32 +38,32 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/communes/by/district/{id}', [GeographyController::class, 'getCommunesByDistrict']);
     Route::get('/villages/by/commune/{id}', [GeographyController::class, 'getVillagesByCommune']);
 
-    Route::middleware('_ADMINISTRATOR_')->group(function () {
-        Route::prefix('/provinces')->group(function () {
-            Route::get('/read/{id}', [GeographyController::class, 'readProvince']);
-            Route::post('/create', [GeographyController::class, 'createProvince']);
-            Route::put('/update', [GeographyController::class, 'updateProvince']);
-            Route::delete('/delete/{id}', [GeographyController::class, 'deleteProvince']);
-        });
-        Route::prefix('/communes')->group(function () {
-            Route::get('/read/{id}', [GeographyController::class, 'readCommune']);
-            Route::post('/create', [GeographyController::class, 'createCommune']);
-            Route::put('/update', [GeographyController::class, 'updateCommune']);
-            Route::delete('/delete/{id}', [GeographyController::class, 'deleteCommune']);
-        });
-        Route::prefix('/districts')->group(function () {
-            Route::get('/read/{id}', [GeographyController::class, 'readDistrict']);
-            Route::post('/create', [GeographyController::class, 'createDistrict']);
-            Route::put('/update', [GeographyController::class, 'updateDistrict']);
-            Route::delete('/delete/{id}', [GeographyController::class, 'deleteDistrict']);
-        });
-        Route::prefix('/villages')->group(function () {
-            Route::get('/read/{id}', [GeographyController::class, 'readVillage']);
-            Route::post('/create', [GeographyController::class, 'createVillage']);
-            Route::put('/update', [GeographyController::class, 'updateVillage']);
-            Route::delete('/delete/{id}', [GeographyController::class, 'deleteVillage']);
-        });
-    });
+    // Route::middleware('_ADMINISTRATOR_')->group(function () {
+    //     Route::prefix('/provinces')->group(function () {
+    //         Route::get('/read/{id}', [GeographyController::class, 'readProvince']);
+    //         Route::post('/create', [GeographyController::class, 'createProvince']);
+    //         Route::put('/update', [GeographyController::class, 'updateProvince']);
+    //         Route::delete('/delete/{id}', [GeographyController::class, 'deleteProvince']);
+    //     });
+    //     Route::prefix('/communes')->group(function () {
+    //         Route::get('/read/{id}', [GeographyController::class, 'readCommune']);
+    //         Route::post('/create', [GeographyController::class, 'createCommune']);
+    //         Route::put('/update', [GeographyController::class, 'updateCommune']);
+    //         Route::delete('/delete/{id}', [GeographyController::class, 'deleteCommune']);
+    //     });
+    //     Route::prefix('/districts')->group(function () {
+    //         Route::get('/read/{id}', [GeographyController::class, 'readDistrict']);
+    //         Route::post('/create', [GeographyController::class, 'createDistrict']);
+    //         Route::put('/update', [GeographyController::class, 'updateDistrict']);
+    //         Route::delete('/delete/{id}', [GeographyController::class, 'deleteDistrict']);
+    //     });
+    //     Route::prefix('/villages')->group(function () {
+    //         Route::get('/read/{id}', [GeographyController::class, 'readVillage']);
+    //         Route::post('/create', [GeographyController::class, 'createVillage']);
+    //         Route::put('/update', [GeographyController::class, 'updateVillage']);
+    //         Route::delete('/delete/{id}', [GeographyController::class, 'deleteVillage']);
+    //     });
+    // });
 
     Route::prefix('/students')->group(function () {
         Route::get('/', [StudentController::class, 'getStudents']);
@@ -87,5 +88,17 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/create', [TestController::class, 'createTest']);
         Route::put('/update', [TestController::class, 'updateTest']);
         Route::delete('/delete/{id}', [TestController::class, 'deleteTest']);
+    });
+
+    Route::prefix('/student-tests')->group(function () {
+        Route::get('/by/student/{id}', [StudentTestController::class, 'getStudentTestsByStudent']);
+        Route::get('/details/by/student/{id}', [StudentTestController::class, 'getStudentTestsWithDetailsByStudent']);
+        Route::get('/read/{id}', [StudentTestController::class, 'readStudentTest']);
+        Route::get('/by/issued-date/{issued_date}', [StudentTestController::class, 'getStudentTestsByIssuedDate']);
+        Route::post('/create', [StudentTestController::class, 'createStudentTest']);
+        Route::put('/update', [StudentTestController::class, 'updateStudentTest']);
+        Route::delete('/delete/{id}', [StudentTestController::class, 'deleteStudentTest']);
+        Route::patch('/change/status', [StudentTestController::class, 'changeStudentTestStatus']);
+        Route::get('/passed-for-certificates', [StudentTestController::class, 'getPassedStudentTestsForCertificates']);
     });
 });

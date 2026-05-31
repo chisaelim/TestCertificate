@@ -155,17 +155,17 @@ const defaultTestObj = JSON.parse(JSON.stringify(testObj));
 const defaultTestErrObj = JSON.parse(JSON.stringify(testErrObj));
 
 onMounted(async () => {
-  try {
-    LoadingModal();
-    await generateTests();
-    CloseModal();
-  } catch (error) {
-    return MessageModal({ icon: "error", title: "Error", text: error.response?.data?.message || error.message });
-  }
   $('#test-modal').on('hide.bs.modal', function () {
     Object.assign(testObj, JSON.parse(JSON.stringify(defaultTestObj)));
     Object.assign(testErrObj, JSON.parse(JSON.stringify(defaultTestErrObj)));
   });
+  try {
+    LoadingModal();
+    await generateTests();
+    return CloseModal();
+  } catch (error) {
+    return MessageModal({ icon: "error", title: "Error", text: error.response?.data?.message || error.message });
+  }
 });
 
 async function generateTests() {
@@ -212,13 +212,13 @@ async function viewTest(id) {
     const response = await apiReadTest(id);
     Object.assign(testObj, response.data.test);
     $('#test-modal').modal('show');
-    CloseModal();
+    return CloseModal();
   } catch (error) {
     return MessageModal({ icon: "error", title: "Error", text: error.response?.data?.message || error.message });
   }
 }
 async function removeTest(id) {
-  $swal.fire({
+  Swal.fire({
     title: 'Want to delete the test ?',
     html: '<pre>' + "Please make a confirmation." + '</pre>',
     icon: 'question',

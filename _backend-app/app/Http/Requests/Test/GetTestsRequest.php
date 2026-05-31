@@ -13,8 +13,6 @@ class GetTestsRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
-            'keyword' => ['nullable', 'string'],
-        ];
+        return [];
     }
 }

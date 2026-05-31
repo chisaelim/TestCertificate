@@ -1,7 +1,5 @@
-export function apiGetStudents(keyword = '') {
-  return axios.get(`${window.APP_API_URL}/students/`, {
-    params: { keyword },
-  });
+export function apiGetStudents() {
+  return axios.get(`${window.APP_API_URL}/students`);
 }
 export function apiGetStudentsWithDetails() {
   return axios.get(`${window.APP_API_URL}/students/details`);

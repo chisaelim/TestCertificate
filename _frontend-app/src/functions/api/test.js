@@ -1,7 +1,5 @@
-export function apiGetTests(keyword = '') {
-  return axios.get(`${window.APP_API_URL}/tests/`, {
-    params: { keyword },
-  });
+export function apiGetTests() {
+  return axios.get(`${window.APP_API_URL}/tests`);
 }
 export function apiGetTestsWithDetails() {
   return axios.get(`${window.APP_API_URL}/tests/details`);

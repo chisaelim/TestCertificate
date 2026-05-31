@@ -43,17 +43,8 @@ class StudentController extends Controller
 
     public function getStudents(GetStudentsRequest $request)
     {
-        $keyword = $request->validated()['keyword'] ?? null;
-        $students = Student::where(function ($query) use ($keyword) {
-            if ($keyword) {
-                $query->where('name_kh', 'like', '%' . $keyword . '%')
-                    ->orWhere('name_en', 'like', '%' . $keyword . '%')
-                    ->orWhere('phone', 'like', '%' . $keyword . '%');
-            }
-        })
-            ->with($this->referenceEagerLoading)
-            ->limit(50)
-            ->get();
+        $students = Student::all();
+
         return response(
             [
                 'students' => StudentResource::collection($students),

@@ -6,6 +6,10 @@ import Swal from 'sweetalert2';
 window.Swal = Swal;
 import { uuidv7 } from "uuidv7";
 window.uuid = uuidv7;
+import moment from 'moment';
+window.moment = moment;
+import pdfMake from 'pdfmake';
+window.pdfMake = pdfMake;
 
 import { LoadingModal, MessageModal, CloseModal } from './functions/swal';
 window.LoadingModal = LoadingModal;
@@ -17,6 +21,28 @@ window.APP_API_URL = import.meta.env.VITE_APP_API_URL;
 window.APP_VERIFY_EMAIL_URL = import.meta.env.VITE_APP_VERIFY_EMAIL_URL;
 window.APP_RESET_PASSWORD_URL = import.meta.env.VITE_APP_RESET_PASSWORD_URL;
 window.APP_GOOGLE_OAUTH_CALLBACK_URL = import.meta.env.VITE_APP_GOOGLE_OAUTH_CALLBACK_URL;
+window.FONTS = {
+  Roboto: {
+    normal: await import('@/assets/fonts/roboto/Roboto-Regular.ttf'),
+    bold: await import('@/assets/fonts/roboto/Roboto-Bold.ttf'),
+    italics: await import('@/assets/fonts/roboto/Roboto-Italic.ttf'),
+    bolditalics: await import('@/assets/fonts/roboto/Roboto-BoldItalic.ttf')
+  },
+  Arial: {
+    normal: await import('@/assets/fonts/arial/ARIAL.TTF'),
+    bold: await import('@/assets/fonts/arial/ARIALBD.TTF'),
+    italics: await import('@/assets/fonts/arial/ARIALI.TTF'),
+    bolditalics: await import('@/assets/fonts/arial/ARIALBI.TTF')
+  },
+  KhmerOSMoul: {
+    normal: await import('@/assets/fonts/KHMER OS MOUL REGULAR.ttf'),
+  },
+  KhmerOSBattambong: {
+    normal: await import('@/assets/fonts/KHMER OS BATTAMBANG REGULAR.ttf'),
+    bold: await import('@/assets/fonts/KhmerOSBattambang-Bold.ttf'),
+  },
+}
+console.log(window.FONTS)
 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'admin-lte/dist/js/adminlte.min.js';
