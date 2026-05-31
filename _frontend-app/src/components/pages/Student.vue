@@ -4,14 +4,14 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-6">
-            <h1 class="m-0">Students</h1>
+            <h1 class="m-0">ទិន្នន័យសិស្ស</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
                 <router-link :to="{ name: 'dashboard' }">Home</router-link>
               </li>
-              <li class="breadcrumb-item active">Students</li>
+              <li class="breadcrumb-item active">ទិន្នន័យសិស្ស</li>
             </ol>
           </div>
         </div>
@@ -67,6 +67,22 @@ const columns = [
     header: 'លេខទូរស័ព្ទ',
   },
   {
+    accessorFn: ({ creator, created_at }) => creator.name + created_at,
+    header: 'បង្កើតដោយ',
+    cell: ({ row }) => [
+      h('div', row.original.created_at),
+      h('div', row.original.creator.name)
+    ],
+  },
+  {
+    accessorFn: ({ updater, updated_at }) => updater.name + updated_at,
+    header: 'កែប្រែដោយ',
+    cell: ({ row }) => [
+      h('div', row.original.updated_at),
+      h('div', row.original.updater.name)
+    ],
+  },
+  {
     accessorKey: 'action',
     header: () => [
       'ជម្រើស',
@@ -107,12 +123,10 @@ const columns = [
 onMounted(async () => {
   try {
     LoadingModal();
-    await Promise.all([
-      generateStudents(),
-    ]);
+    await generateStudents();
     return CloseModal();
   } catch (error) {
-    return ErrorModal(error);
+    return MessageModal({ icon: "error", title: "Error", text: error.response?.data?.message || error.message });
   }
 });
 

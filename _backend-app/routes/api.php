@@ -5,6 +5,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\GeographyController;
 use App\Http\Controllers\API\GoogleOAuthController;
 use App\Http\Controllers\API\StudentController;
+use App\Http\Controllers\API\TestController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/signup', [AuthController::class, 'signup']);
@@ -30,12 +31,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update/profile-image', [AuthController::class, 'updateProfileImage']);
     Route::delete('/delete/profile-image', [AuthController::class, 'deleteProfileImage']);
 
-    Route::prefix('/assets')->group(function () {
-        Route::get('/all/genders', [AssetController::class, 'getAllGenders']);
-        Route::get('/all/nationalities', [AssetController::class, 'getAllNationalities']);
-        Route::get('/all/ethnicities', [AssetController::class, 'getAllEthnicities']);
-        Route::get('/all/religions', [AssetController::class, 'getAllReligions']);
-    });
 
     Route::get('/provinces', [GeographyController::class, 'getProvinces']);
     Route::get('/districts/by/province/{id}', [GeographyController::class, 'getDistrictsByProvince']);
@@ -76,5 +71,21 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/create', [StudentController::class, 'createStudent']);
         Route::put('/update', [StudentController::class, 'updateStudent']);
         Route::delete('/delete/{id}', [StudentController::class, 'deleteStudent']);
+    });
+
+    Route::prefix('/assets')->group(function () {
+        Route::get('/all/genders', [AssetController::class, 'getAllGenders']);
+        Route::get('/all/nationalities', [AssetController::class, 'getAllNationalities']);
+        Route::get('/all/ethnicities', [AssetController::class, 'getAllEthnicities']);
+        Route::get('/all/religions', [AssetController::class, 'getAllReligions']);
+    });
+
+    Route::prefix('/tests')->group(function () {
+        Route::get('/', [TestController::class, 'getTests']);
+        Route::get('/details', [TestController::class, 'getTestsWithDetails']);
+        Route::get('/read/{id}', [TestController::class, 'readTest']);
+        Route::post('/create', [TestController::class, 'createTest']);
+        Route::put('/update', [TestController::class, 'updateTest']);
+        Route::delete('/delete/{id}', [TestController::class, 'deleteTest']);
     });
 });

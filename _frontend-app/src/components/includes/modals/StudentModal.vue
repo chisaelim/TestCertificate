@@ -290,13 +290,13 @@ const porVillages = ref([]);
 
 const studentObj = reactive({
   id: null,
-  name_en: null,
-  name_kh: null,
-  dob: null,
-  home_no: null,
-  street_no: null,
-  phone: null,
-  photo: null,
+  name_en: "",
+  name_kh: "",
+  dob: "",
+  home_no: "",
+  street_no: "",
+  phone: "",
+  photo: "",
   gender_id: 1,
   nationality_id: 1,
   ethnicity_id: 1,
@@ -311,25 +311,25 @@ const studentObj = reactive({
   por_village_id: null,
 });
 const studentErrObj = reactive({
-  name_en: null,
-  name_kh: null,
-  dob: null,
-  home_no: null,
-  street_no: null,
-  phone: null,
-  photo: null,
-  gender_id: null,
-  nationality_id: null,
-  ethnicity_id: null,
-  religion_id: null,
-  pob_province_id: null,
-  pob_district_id: null,
-  pob_commune_id: null,
-  pob_village_id: null,
-  por_province_id: null,
-  por_district_id: null,
-  por_commune_id: null,
-  por_village_id: null,
+  name_en: "",
+  name_kh: "",
+  dob: "",
+  home_no: "",
+  street_no: "",
+  phone: "",
+  photo: "",
+  gender_id: "",
+  nationality_id: "",
+  ethnicity_id: "",
+  religion_id: "",
+  pob_province_id: "",
+  pob_district_id: "",
+  pob_commune_id: "",
+  pob_village_id: "",
+  por_province_id: "",
+  por_district_id: "",
+  por_commune_id: "",
+  por_village_id: "",
 });
 
 const defaultStudentObj = JSON.parse(JSON.stringify(studentObj));
@@ -351,7 +351,7 @@ onMounted(async () => {
     ]);
     return CloseModal();
   } catch (error) {
-    return ErrorModal(error);
+    return MessageModal({ icon: "error", title: "Error", text: error.response?.data?.message || error.message });
   }
 });
 watch(() => studentObj.pob_province_id, async (nv, ov) => {
@@ -416,17 +416,17 @@ async function buildFormData(data, includePhoto) {
 async function saveStudent() {
   try {
     LoadingModal();
-    let res = null;
+    let response = null;
     if (studentObj.id === null) {
-      res = await apiCreateStudent(await buildFormData(studentObj, true));
-      props.onCreated(res.data.student);
+      response = await apiCreateStudent(await buildFormData(studentObj, true));
+      props.onCreated(response.data.student);
     } else {
       const photoChanged = currentImage.value !== studentObj.photo;
-      res = await apiUpdateStudent(await buildFormData(studentObj, photoChanged));
-      props.onUpdated(res.data.student);
+      response = await apiUpdateStudent(await buildFormData(studentObj, photoChanged));
+      props.onUpdated(response.data.student);
     }
     hideStudentModal();
-    return MessageModal({ icon: "success", title: "Success", text: res.data.message });
+    return MessageModal({ icon: "success", title: "Success", text: response.data.message });
   } catch (error) {
     const { response } = error;
     if (!response) {
@@ -447,15 +447,15 @@ async function saveStudent() {
 async function viewStudent(id) {
   try {
     LoadingModal();
-    const res = await apiReadStudent(id);
-    const { photo, ...newStudentObj } = res.data.student;
+    const response = await apiReadStudent(id);
+    const { photo, ...newStudentObj } = response.data.student;
     Object.assign(studentObj, newStudentObj);
     studentObj.photo = photo;
     currentImage.value = photo;
     showStudentModal();
     return CloseModal();
   } catch (error) {
-    return ErrorModal(error);
+    return MessageModal({ icon: "error", title: "Error", text: error.response?.data?.message || error.message });
   }
 }
 async function removeStudent(id) {
@@ -470,12 +470,12 @@ async function removeStudent(id) {
     if (sw.isConfirmed) {
       try {
         LoadingModal();
-        const res = await apiDeleteStudent(id);
-        const { student, message } = res.data;
+        const response = await apiDeleteStudent(id);
+        const { student, message } = response.data;
         props.onDeleted(student);
         return MessageModal({ icon: "success", title: "Success", text: message });
       } catch (error) {
-        return ErrorModal(error);
+        return MessageModal({ icon: "error", title: "Error", text: error.response?.data?.message || error.message });
       }
     }
   });
@@ -483,64 +483,64 @@ async function removeStudent(id) {
 
 async function generateGenders() {
   try {
-    const res = await apiGetAllGenders();
-    genders.value = res.data.genders;
+    const response = await apiGetAllGenders();
+    genders.value = response.data.genders;
   } catch (error) {
     throw error;
   }
 }
 async function generateNationalities() {
   try {
-    const res = await apiGetAllNationalities();
-    nationalities.value = res.data.nationalities;
+    const response = await apiGetAllNationalities();
+    nationalities.value = response.data.nationalities;
   } catch (error) {
     throw error;
   }
 }
 async function generateEthnicities() {
   try {
-    const res = await apiGetAllEthnicities();
-    ethnicities.value = res.data.ethnicities;
+    const response = await apiGetAllEthnicities();
+    ethnicities.value = response.data.ethnicities;
   } catch (error) {
     throw error;
   }
 }
 async function generateReligions() {
   try {
-    const res = await apiGetAllReligions();
-    religions.value = res.data.religions;
+    const response = await apiGetAllReligions();
+    religions.value = response.data.religions;
   } catch (error) {
     throw error;
   }
 }
 async function generateProvinces() {
   try {
-    const res = await apiGetProvinces();
-    provinces.value = res.data.provinces;
+    const response = await apiGetProvinces();
+    provinces.value = response.data.provinces;
   } catch (error) {
     throw error;
   }
 }
 async function generateDistrictsByProvince(id) {
   try {
-    const res = await apiGetDistrictsByProvince(id);
-    return res;
+    const response = await apiGetDistrictsByProvince(id);
+    return response;
   } catch (error) {
     throw error;
   }
 }
 async function generateCommunesByDistrict(id) {
   try {
-    const res = await apiGetCommunesByDistrict(id);
-    return res;
+    const response = await apiGetCommunesByDistrict(id);
+    return response;
   } catch (error) {
     throw error;
   }
 }
 async function generateVillagesByCommune(id) {
   try {
-    const res = await apiGetVillagesByCommune(id);
-    return res;
+    const response = await apiGetVillagesByCommune(id);
+    return response;
   } catch (error) {
     throw error;
   }

@@ -5,17 +5,18 @@ namespace App\Http\Controllers\API;
 use App\Http\Resources\Student\StudentResource;
 use App\Http\Resources\Student\DetailStudentResource;
 use App\Services\ImageClassService;
-use Exception;
-use Illuminate\Http\Request;
-use Throwable;
 use App\Models\Student;
 use App\Models\Province;
 use App\Helpers\ResponseHelper;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Student\GetStudentsRequest;
+use App\Http\Requests\Student\GetStudentsWithDetailsRequest;
 use App\Http\Requests\Student\CreateStudentRequest;
 use App\Http\Requests\Student\UpdateStudentRequest;
-use Illuminate\Validation\ValidationException;
+use App\Http\Requests\Student\ReadStudentRequest;
+use App\Http\Requests\Student\DeleteStudentRequest;
 
 class StudentController extends Controller
 {
@@ -38,9 +39,9 @@ class StudentController extends Controller
         'updater',
     ];
 
-    public function getStudents(Request $request)
+    public function getStudents(GetStudentsRequest $request)
     {
-        $keyword = $request->input('keyword', null);
+        $keyword = $request->validated()['keyword'] ?? null;
         $students = Student::where(function ($query) use ($keyword) {
             if ($keyword) {
                 $query->where('name_kh', 'like', '%' . $keyword . '%')
@@ -59,7 +60,7 @@ class StudentController extends Controller
         );
     }
 
-    public function getStudentsWithDetails()
+    public function getStudentsWithDetails(GetStudentsWithDetailsRequest $request)
     {
         $students = Student::with($this->manageEagerLoading)->get();
 
@@ -119,10 +120,10 @@ class StudentController extends Controller
                 ->first();
 
             DB::commit();
-        } catch (Throwable $th) {
+        } catch (Exception $e) {
             $imageClass->delete($newImage);
             DB::rollback();
-            throw $th;
+            return ResponseHelper::createErrorMsg();
         }
 
         return response(
@@ -134,7 +135,7 @@ class StudentController extends Controller
         );
     }
 
-    public function readStudent($id)
+    public function readStudent(ReadStudentRequest $request, $id)
     {
         $student = Student::where('id', $id)
             ->with($this->readEagerLoading)
@@ -217,22 +218,27 @@ class StudentController extends Controller
             if ($request->has('photo')) {
                 $imageClass->delete($oldImage);
             }
-        } catch (Throwable $th) {
+
+            $student = Student::where('id', $student->id)
+                ->with($this->manageEagerLoading)
+                ->first();
+
+        } catch (Exception $e) {
             $imageClass->delete($newImage);
             DB::rollback();
-            throw $th;
+            return ResponseHelper::updateErrorMsg();
         }
 
         return response(
             [
                 'message' => 'The student has been updated.',
-                'student' => new DetailStudentResource($student->load($this->manageEagerLoading)),
+                'student' => new DetailStudentResource($student),
             ],
             200,
         );
     }
 
-    public function deleteStudent($id)
+    public function deleteStudent(DeleteStudentRequest $request, $id)
     {
         $student = Student::where('id', $id)
             ->with($this->manageEagerLoading)
@@ -245,8 +251,6 @@ class StudentController extends Controller
         try {
             $student->delete();
         } catch (Exception $e) {
-            return ResponseHelper::deleteErrorMsg();
-        } catch (Throwable $th) {
             return ResponseHelper::deleteErrorMsg();
         }
 

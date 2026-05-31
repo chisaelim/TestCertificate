@@ -7,11 +7,10 @@ window.Swal = Swal;
 import { uuidv7 } from "uuidv7";
 window.uuid = uuidv7;
 
-import { LoadingModal, MessageModal, CloseModal, ErrorModal } from './functions/swal';
+import { LoadingModal, MessageModal, CloseModal } from './functions/swal';
 window.LoadingModal = LoadingModal;
 window.MessageModal = MessageModal;
 window.CloseModal = CloseModal;
-window.ErrorModal = ErrorModal;
 
 window.APP_URL = import.meta.env.VITE_APP_URL;
 window.APP_API_URL = import.meta.env.VITE_APP_API_URL;

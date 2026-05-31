@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Geography;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
@@ -91,9 +89,9 @@ return new class extends Migration {
             }
 
             DB::commit();
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             DB::rollBack();
-            throw $th;
+            throw $e;
         }
     }
 
