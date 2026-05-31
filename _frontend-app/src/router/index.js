@@ -17,6 +17,7 @@ import Footer from "@/components/includes/Footer.vue";
 import Student from '@/components/pages/Student.vue';
 import Test from '@/components/pages/Test.vue';
 import StudentTests from '@/components/pages/StudentTests.vue';
+import UserManagement from '@/components/pages/UserManagement.vue';
 
 const includeComponents = {
   navbar: Navbar,
@@ -115,6 +116,15 @@ const router = createRouter({
         ...includeComponents
       },
       meta: { guarded: true },
+    },
+    {
+      path: '/users',
+      name: 'users',
+      components: {
+        default: UserManagement,
+        ...includeComponents
+      },
+      meta: { guarded: true, levels: ['_ADMINISTRATOR_'] },
     },
     {
       path: '/:pathMatch(.*)*',

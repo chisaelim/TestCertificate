@@ -104,6 +104,9 @@ router.beforeEach(async (to, from) => {
   if (guarded && !userStore.isAuthenticated) { // if the route is guarded and the user is not authenticated, redirect to signin page
     return { name: 'auth.signin' };
   }
+  if (to.meta.levels && !to.meta.levels.includes(userStore.level)) { // if the route requires admin and the user is not an admin, redirect to dashboard
+    return { name: 'dashboard' };
+  }
   if (!guarded && userStore.isAuthenticated) { // if the route is not guarded and the user is authenticated, redirect to dashboard page
     return { name: 'dashboard' };
   }
