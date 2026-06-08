@@ -30,6 +30,12 @@ class AuthController extends Controller
             'password' => $request->password,
         ]);
 
+        // Mark email as verified for users who signed up with Google OAuth
+        $user->forceFill([
+            'email_verified_at' => now(),
+        ]);
+        $user->save();
+
         $user->sendEmailVerificationNotification($request->callback_url);
 
         return response([
