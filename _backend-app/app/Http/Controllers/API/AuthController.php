@@ -36,7 +36,7 @@ class AuthController extends Controller
         ]);
         $user->save();
 
-        $user->sendEmailVerificationNotification($request->callback_url);
+        // $user->sendEmailVerificationNotification($request->callback_url);
 
         return response([
             'message' => 'User signed up.',
