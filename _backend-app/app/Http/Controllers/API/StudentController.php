@@ -92,8 +92,8 @@ class StudentController extends Controller
                 'name_kh' => $validated['name_kh'],
                 'name_en' => strtoupper($validated['name_en']),
                 'dob' => $validated['dob'],
-                'home_no' => $validated['home_no'],
-                'street_no' => $validated['street_no'],
+                'home_no' => $validated['home_no'] ?? null,
+                'street_no' => $validated['street_no'] ?? null,
                 'phone' => $validated['phone'],
                 'photo' => $newImage,
                 'gender_id' => $validated['gender_id'],
@@ -184,8 +184,8 @@ class StudentController extends Controller
             $student->name_kh = $validated['name_kh'];
             $student->name_en = strtoupper($validated['name_en']);
             $student->dob = $validated['dob'];
-            $student->home_no = $validated['home_no'];
-            $student->street_no = $validated['street_no'];
+            $student->home_no = $validated['home_no'] ?? null;
+            $student->street_no = $validated['street_no'] ?? null;
             $student->phone = $validated['phone'];
             $student->gender_id = $validated['gender_id'];
             $student->ethnicity_id = $validated['ethnicity_id'];

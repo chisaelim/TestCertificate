@@ -16,9 +16,9 @@ class UpdateTestRequest extends FormRequest
     {
         return [
             'id' => ['required', 'integer', 'exists:tests,id'],
-            'name_en' => ['required', 'string', Rule::unique('tests', 'name_en')->ignore($this->route('id'))],
-            'name_kh' => ['required', 'string', Rule::unique('tests', 'name_kh')->ignore($this->route('id'))],
-            'short_name' => ['required', 'string', Rule::unique('tests', 'short_name')->ignore($this->route('id'))],
+            'name_en' => ['required', 'string', Rule::unique('tests', 'name_en')->ignore($this->id)],
+            'name_kh' => ['required', 'string', Rule::unique('tests', 'name_kh')->ignore($this->id)],
+            'short_name' => ['required', 'string', Rule::unique('tests', 'short_name')->ignore($this->id)],
         ];
     }
 }

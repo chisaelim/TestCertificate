@@ -22,7 +22,7 @@ class UpdateStudentRequest extends FormRequest
             'dob' => ['required', 'date_format:d-m-Y'],
             'home_no' => ['nullable', 'string'],
             'street_no' => ['nullable', 'string'],
-            'phone' => ['required', 'regex:/^0[0-9]{2}[0-9]{3}[0-9]{3,4}$/', Rule::unique('students', 'phone')->ignore($this->route('id'))],
+            'phone' => ['required', 'regex:/^0[0-9]{2}[0-9]{3}[0-9]{3,4}$/', Rule::unique('students', 'phone')->ignore($this->id)],
             'photo' => ['sometimes', 'nullable', 'file', 'image', 'mimes:png,jpg,jpeg', 'dimensions:width=454,height=454'],
 
             'gender_id' => ['required', 'integer', 'exists:genders,id'],
