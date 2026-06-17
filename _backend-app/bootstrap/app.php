@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
             | Illuminate\Http\Request::HEADER_X_FORWARDED_PORT
             | Illuminate\Http\Request::HEADER_X_FORWARDED_PROTO);
 
+        $middleware->append(\App\Http\Middleware\UnicodeCorrection::class);
         $middleware->alias([
             '_ADMINISTRATOR_' => App\Http\Middleware\AdministratorMiddleware::class,
             '_DOCUMENT_CONTROLLER_' => App\Http\Middleware\DocumentControllerMiddleware::class,
