@@ -20,6 +20,10 @@ use App\Http\Requests\Student\DeleteStudentRequest;
 
 class StudentController extends Controller
 {
+    private $referenceEagerLoading = [
+        'gender',
+    ];
+
     private $manageEagerLoading = [
         'gender',
         'creator',
@@ -39,7 +43,7 @@ class StudentController extends Controller
 
     public function getStudents(GetStudentsRequest $request)
     {
-        $students = Student::all();
+        $students = Student::with($this->referenceEagerLoading)->get();
 
         return response(
             [
