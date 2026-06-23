@@ -17,8 +17,6 @@ class DetailStudentTestResource extends JsonResource
             'issued_date' => $this->issued_date,
             'expired_date' => $this->expired_date,
             'status' => $this->status,
-            'student_id' => $this->student_id,
-            'test_id' => $this->test_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'student' => $this->whenLoaded('student', fn() => new StudentResource($this->student)),
