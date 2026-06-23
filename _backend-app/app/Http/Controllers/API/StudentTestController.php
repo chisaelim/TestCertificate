@@ -153,6 +153,7 @@ class StudentTestController extends Controller
         try {
             $student_test = StudentTest::find($id);
             $student_test->test_id = $test_id;
+            $student_test->student_id = $student_id;
             $student_test->issued_date = $issued_date;
             $student_test->expired_date = $expired_date;
             $updated = $student_test->save();
