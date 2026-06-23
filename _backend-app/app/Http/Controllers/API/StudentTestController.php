@@ -102,7 +102,7 @@ class StudentTestController extends Controller
             ->first();
         if ($existed) {
             throw ValidationException::withMessages([
-                'issued_date' => 'ទិន្នន័យការធ្វើតេស្តមានរួចហើយ។',
+                'issued_date' => 'The student test data already exists.',
             ]);
         }
 
@@ -146,7 +146,7 @@ class StudentTestController extends Controller
             ->first();
         if ($existed && $existed->id !== $id) {
             throw ValidationException::withMessages([
-                'issued_date' => 'ទិន្នន័យការធ្វើតេស្តមានរួចហើយ។',
+                'issued_date' => 'The student test data already exists.',
             ]);
         }
 
