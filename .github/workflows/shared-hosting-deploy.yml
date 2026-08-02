@@ -48,6 +48,7 @@ jobs:
 
             set -e
 
+            composer update
             composer install
             npm install
             npm run build
