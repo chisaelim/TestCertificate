@@ -34,7 +34,7 @@ jobs:
           remote_key: ${{ secrets.HOSTINGER_SSH_KEY }}
           remote_port: ${{ secrets.HOSTINGER_PORT }}
 
-      - name: Deploy on Hostinger via SSH
+      - name: Deploy on backend Hostinger via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOSTINGER_IP }}
@@ -47,23 +47,29 @@ jobs:
             cd ~/domains/cambodiasdk.com/public_html/TESTING/TEST_CERTIFICATE/_backend_app
 
             set -e
-            composer update --no-dev --optimize-autoloader
-            composer install --no-dev --optimize-autoloader
 
+            composer install
             npm install
-
             npm run build
-
-            php artisan migrate --force
-
             php artisan storage:link
-
             php artisan version:generate
             php artisan optimize:clear
             php artisan optimize
 
+      - name: Deploy on frontend Hostinger via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOSTINGER_IP }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          port: ${{ secrets.HOSTINGER_PORT }}
+          script: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd ~/domains/cambodiasdk.com/public_html/TESTING/TEST_CERTIFICATE/_frontend_app
 
-            npm install
+            set -e
 
+            npm install
             npm run build
+            cp ~/domains/cambodiasdk.com/public_html/TESTING/TEST_CERTIFICATE/_frontend_app/public/.htaccess ~/domains/cambodiasdk.com/public_html/TESTING/TEST_CERTIFICATE/_frontend_app/dist/.htaccess
