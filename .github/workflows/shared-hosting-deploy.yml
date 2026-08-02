@@ -1,0 +1,69 @@
+name: CI/CD pipeline
+
+on:
+  push:
+    branches: [master]
+  # pull_request:
+  #   branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Sync files to Hostinger via rsync
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: "
+            -avzr
+            --delete
+            --exclude='_backend_app/.env'
+            --exclude='_backend_app/public/storage/'
+            --exclude='_backend_app/storage/app/public/'
+            --exclude='_backend_app/storage/app/private/'
+            --exclude='_backend_app/vendor'
+            --exclude='_backend_app/node_modules'
+            --exclude='_frontend_app/.env'
+            --exclude='_frontend_app/node_modules'
+            "
+          path: "."
+          remote_path: "~/domains/cambodiasdk.com/public_html/TESTING/TEST_CERTIFICATE"
+          remote_host: ${{ secrets.HOSTINGER_IP }}
+          remote_user: ${{ secrets.HOSTINGER_USER }}
+          remote_key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          remote_port: ${{ secrets.HOSTINGER_PORT }}
+
+      - name: Deploy on Hostinger via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOSTINGER_IP }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          port: ${{ secrets.HOSTINGER_PORT }}
+          script: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            cd ~/domains/cambodiasdk.com/public_html/TESTING/TEST_CERTIFICATE/_backend_app
+
+            set -e
+            composer update --no-dev --optimize-autoloader
+            composer install --no-dev --optimize-autoloader
+
+            npm install
+
+            npm run build
+
+            php artisan migrate --force
+
+            php artisan storage:link
+
+            php artisan version:generate
+            php artisan optimize:clear
+            php artisan optimize
+
+            cd ~/domains/cambodiasdk.com/public_html/TESTING/TEST_CERTIFICATE/_frontend_app
+
+            npm install
+
+            npm run build
